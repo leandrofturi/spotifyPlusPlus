@@ -1,0 +1,1 @@
+#include "../bib/Assinante.hpp"

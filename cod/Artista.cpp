@@ -1,0 +1,1 @@
+#include "../bib/Artista.hpp"
