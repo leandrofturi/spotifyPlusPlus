@@ -8,7 +8,7 @@ class Assinante : private Usuario
 {
 public:
     Assinante();
-    Assinante(std::string nome);
+    Assinante(std::string nome, int codigo);
     ~Assinante();
 };
 

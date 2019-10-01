@@ -1,1 +1,0 @@
-#include "../bib/Genero.hpp"

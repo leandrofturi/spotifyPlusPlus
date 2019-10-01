@@ -2,7 +2,7 @@
 
 Assinante::Assinante() {}
 
-Assinante::Assinante(std::string nome)
-    : Usuario(nome) {}
+Assinante::Assinante(std::string nome, int codigo)
+    : Usuario(nome, codigo) {}
 
 Assinante::~Assinante() {}

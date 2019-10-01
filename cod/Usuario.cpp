@@ -2,9 +2,10 @@
 
 Usuario::Usuario() {}
 
-Usuario::Usuario(std::string nome)
+Usuario::Usuario(std::string nome, int codigo)
 {
     this->nome = nome;
+    this->codigo = codigo;
 }
 
 Usuario::~Usuario() {}
@@ -17,4 +18,14 @@ std::string Usuario::getNome()
 void Usuario::setNome(std::string nome)
 {
     this->nome = nome;
+}
+
+int Usuario::getCodigo()
+{
+    return this->codigo;
+}
+
+void Usuario::setCodigo(int codigo)
+{
+    this->codigo = codigo;
 }

@@ -4,14 +4,11 @@
 #include <iostream>
 #include "Usuario.hpp"
 
-class Produtor : private Usuario
+class Produtor : public Usuario
 {
-protected:
-    std::string biografia;
-
 public:
     Produtor();
-    Produtor(std::string nome, std::string biografia);
+    Produtor(std::string nome, int codigo);
     ~Produtor();
 };
 

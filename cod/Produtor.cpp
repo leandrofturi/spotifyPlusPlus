@@ -2,10 +2,7 @@
 
 Produtor::Produtor() {}
 
-Produtor::Produtor(std::string nome, std::string biografia)
-    :Usuario(nome)
-{
-    this->biografia = biografia;
-}
+Produtor::Produtor(std::string nome, int codigo)
+    :Usuario(nome, codigo) {}
 
 Produtor::~Produtor() {}
