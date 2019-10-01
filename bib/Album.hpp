@@ -27,6 +27,9 @@ public:
     int getAnoLancamento();
     void setAnoLancamento(int anoLancamento);
 
+    std::list<Musica*>* getMusicas();
+    void setMusicas(std::list<Musica*>* musicas);
+
     void addMusica(Musica* musica);
 };
 

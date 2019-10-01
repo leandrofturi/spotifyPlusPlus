@@ -58,6 +58,16 @@ void Album::setAnoLancamento(int anoLancamento)
     this->anoLancamento = anoLancamento;
 }
 
+std::list<Musica*>* Album::getMusicas()
+{
+    return this->musicas;
+}
+
+void Album::setMusicas(std::list<Musica*>* musicas)
+{
+    this->musicas = musicas;
+}
+
 void Album::addMusica(Musica* musica)
 {
     this->musicas->push_back(musica);
