@@ -35,6 +35,8 @@ int qtdProdutos = 0;
 Midia::Midia()
 {
     this->qtdProdutos ++;
+
+    this->produtores = new std::list<Produtor*>;
 }
 
 Midia::Midia(std::string nome, bool explicito, Genero* genero)
@@ -44,11 +46,15 @@ Midia::Midia(std::string nome, bool explicito, Genero* genero)
     this->genero = genero;
 
     this->qtdProdutos ++;
+
+    this->produtores = new std::list<Produtor*>;
 }
 
 Midia::~Midia()
 {
     this->qtdProdutos --;
+
+    delete this->produtores;
 }
 
 std::string Midia::getNome()
@@ -74,4 +80,19 @@ void Midia::setExplicito(bool explicito)
 int Midia::getQtdProdutos()
 {
     return this->qtdProdutos;
+}
+
+std::list<Produtor*>* Midia::getProdutores()
+{
+    return this->produtores;
+}
+
+void Midia::setProdutores(std::list<Produtor*>* produtores)
+{
+    this->produtores = produtores;
+}
+
+void Midia::addProdutor(Produtor* produtor)
+{
+    this->produtores->push_back(produtor);
 }

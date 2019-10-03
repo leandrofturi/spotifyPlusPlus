@@ -19,3 +19,13 @@ void Podcast::setQtdTemporadas(int qtdTemporadas)
 {
     this->qtdTemporadas = qtdTemporadas;
 }
+
+Podcaster* Podcast::getPodcaster()
+{
+    return this->podcaster;
+}
+
+void Podcast::setPodcaster(Podcaster* podcaster)
+{
+    this->podcaster = podcaster;
+}

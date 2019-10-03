@@ -5,6 +5,8 @@
 #include <list>
 #include "Musica.hpp"
 
+class Artista;
+
 class Album
 {
 private:
@@ -14,6 +16,7 @@ private:
     int qtdMusicas;
 
     std::list<Musica*>* musicas;
+    Artista *artista;
 
 public:
     Album();
@@ -29,8 +32,9 @@ public:
 
     std::list<Musica*>* getMusicas();
     void setMusicas(std::list<Musica*>* musicas);
-
     void addMusica(Musica* musica);
+    Artista* getArtista();
+    void setArtista(Artista* artista);
 };
 
 #endif

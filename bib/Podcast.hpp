@@ -4,10 +4,14 @@
 #include <iostream>
 #include "Midia.hpp"
 
+class Podcaster;
+
 class Podcast : public Midia
 {
 private:
     int qtdTemporadas;
+
+    Podcaster* podcaster;
 
 public:
     Podcast();
@@ -16,6 +20,9 @@ public:
 
     int getQtdTemporadas();
     void setQtdTemporadas(int qtdTemporadas);
+
+    Podcaster* getPodcaster();
+    void setPodcaster(Podcaster* podcaster);
 };
 
 #endif

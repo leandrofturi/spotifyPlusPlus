@@ -4,11 +4,15 @@
 #include <iostream>
 #include "Midia.hpp"
 
+class Album;
+
 class Musica : public Midia
 {
 private:
     int duracao;
     int anoLancamento;
+
+    Album* album;
 
 public:
     Musica();
@@ -19,6 +23,9 @@ public:
 	void setDuracao(int duracao);
 	int getAnoLancamento();
 	void setAnoLancamento(int anoLancamento);
+
+    Album* getAlbum();
+    void setAlbum(Album* album);
 };
 
 #endif

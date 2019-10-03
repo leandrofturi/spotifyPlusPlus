@@ -2,6 +2,8 @@
 #define _MIDIA_HPP_
 
 #include <iostream>
+#include <list>
+#include "Produtor.hpp"
 
 class Midia
 {
@@ -29,6 +31,8 @@ protected:
 private:
     bool explicito;
 
+    std::list<Produtor*>* produtores;
+
 public:
     Genero* genero;
 
@@ -43,6 +47,10 @@ public:
     bool getExplicito();
     void setExplicito(bool explicito);
     int getQtdProdutos();
+
+    std::list<Produtor*>* getProdutores();
+    void setProdutores(std::list<Produtor*>* produtores);
+    void addProdutor(Produtor* produtor);
 };
 
 #endif

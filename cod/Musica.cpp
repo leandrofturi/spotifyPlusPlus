@@ -30,3 +30,13 @@ void Musica::setAnoLancamento(int anoLancamento)
 {
     this->anoLancamento = anoLancamento;
 }
+
+Album* Musica::getAlbum()
+{
+    return this->album;
+}
+
+void Musica::setAlbum(Album* album)
+{
+    this->album = album;
+}
