@@ -30,3 +30,8 @@ void Podcaster::addPodcast(Podcast* podcast)
 {
     this->podcasts->push_back(podcast);
 }
+
+void Podcaster::rmPodcast(Podcast* podcast)
+{
+    this->podcasts->remove(podcast);
+}

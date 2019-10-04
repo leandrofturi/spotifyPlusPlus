@@ -28,15 +28,19 @@ public:
     std::list<Assinante*>* getAssinantes();
     void setAssinantes(std::list<Assinante*>* assinantes);
     void addAssinante(Assinante* assinante);
+    void rmAssinante(Assinante* assinante);
     std::list<Produtor*>* getProdutores();
     void setProdutores(std::list<Produtor*>* produtores);
     void addProdutor(Produtor* produtor);
+    void rmProdutor(Produtor* produtor);
     std::list<Midia*>* getMidias();
     void setMidias(std::list<Midia*>* midias);
     void addMidia(Midia* midia);
+    void rmMidia(Midia* midia);
     std::list<Midia::Genero*>* getGeneros();
     void setGeneros(std::list<Midia::Genero*>* generos);
     void addGenero(Midia::Genero* genero);
+    void rmGenero(Midia::Genero* genero);
 };
 
 #endif

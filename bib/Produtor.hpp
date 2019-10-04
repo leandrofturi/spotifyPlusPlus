@@ -4,8 +4,7 @@
 #include <iostream>
 #include <list>
 #include "Usuario.hpp"
-
-class Midia;
+#include "Midia.hpp"
 
 class Produtor : public Usuario
 {
@@ -20,6 +19,8 @@ public:
     std::list<Midia*>* getMidias();
     void setMidias(std::list<Midia*>* midias);
     void addMidia(Midia* midia);
+    void rmMidia(Midia* midia);
+    void imprimeMidias();
 };
 
 #endif

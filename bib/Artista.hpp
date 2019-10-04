@@ -19,6 +19,7 @@ public:
     std::list<Album*>* getAlbuns();
     void setAlbuns(std::list<Album*>* albuns);
     void addAlbum(Album* album);
+    void rmAlbum(Album* album);
 };
 
 #endif

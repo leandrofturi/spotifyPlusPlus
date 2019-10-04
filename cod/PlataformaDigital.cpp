@@ -72,6 +72,11 @@ void PlataformaDigital::addAssinante(Assinante* assinante)
     this->assinantes->push_back(assinante);
 }
 
+void PlataformaDigital::rmAssinante(Assinante* assinante)
+{
+    this->assinantes->remove(assinante);
+}
+
 std::list<Produtor*>* PlataformaDigital::getProdutores()
 {
     return this->produtores;
@@ -85,6 +90,11 @@ void PlataformaDigital::setProdutores(std::list<Produtor*>* produtores)
 void PlataformaDigital::addProdutor(Produtor* produtor)
 {
     this->produtores->push_back(produtor);
+}
+
+void PlataformaDigital::rmProdutor(Produtor* produtor)
+{
+    this->produtores->remove(produtor);
 }
 
 std::list<Midia*>* PlataformaDigital::getMidias()
@@ -102,6 +112,11 @@ void PlataformaDigital::addMidia(Midia* midia)
     this->midias->push_back(midia);
 }
 
+void PlataformaDigital::rmMidia(Midia* midia)
+{
+    this->midias->remove(midia);
+}
+
 std::list<Midia::Genero*>* PlataformaDigital::getGeneros()
 {
     return this->generos;
@@ -115,4 +130,9 @@ void PlataformaDigital::setGeneros(std::list<Midia::Genero*>* generos)
 void PlataformaDigital::addGenero(Midia::Genero* genero)
 {
     this->generos->push_back(genero);
+}
+
+void PlataformaDigital::rmGenero(Midia::Genero* genero)
+{
+    this->generos->remove(genero);
 }

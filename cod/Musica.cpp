@@ -2,34 +2,10 @@
 
 Musica::Musica() {}
 
-Musica::Musica(std::string nome, bool explicito, Genero* genero, int duracao, int anoLancamento)
-    : Midia(nome, explicito, genero)
-{
-    this->duracao = duracao;
-    this->anoLancamento = anoLancamento;
-}
+Musica::Musica(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero)
+    : Midia(nome, codigo, duracao, anoLancamento, genero) {}
 
 Musica::~Musica() {}
-
-int Musica::getDuracao()
-{
-    return this->duracao;
-}
-
-void Musica::setDuracao(int duracao)
-{
-    this->duracao = duracao;
-}
-
-int Musica::getAnoLancamento()
-{
-    return this->anoLancamento;
-}
-
-void Musica::setAnoLancamento(int anoLancamento)
-{
-    this->anoLancamento = anoLancamento;
-}
 
 Album* Musica::getAlbum()
 {
@@ -39,4 +15,15 @@ Album* Musica::getAlbum()
 void Musica::setAlbum(Album* album)
 {
     this->album = album;
+}
+
+void Musica::imprimeInfoProduto()
+{
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Musica" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Nome: " << this->getNome() << std::endl;
+    std::cout << "Genero: " << this->getGenero()->getNome() << std::endl;
+    std::cout << "Duracao: " << this->getDuracao() << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
 }

@@ -30,3 +30,8 @@ void Artista::addAlbum(Album* album)
 {
     this->albuns->push_back(album);
 }
+
+void Artista::rmAlbum(Album* album)
+{
+    this->albuns->remove(album);
+}

@@ -73,6 +73,11 @@ void Album::addMusica(Musica* musica)
     this->musicas->push_back(musica);
 }
 
+void Album::rmMusica(Musica* musica)
+{
+    this->musicas->remove(musica);
+}
+
 Artista* Album::getArtista()
 {
     return this->artista;

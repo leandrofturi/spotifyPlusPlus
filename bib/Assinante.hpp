@@ -14,6 +14,8 @@ private:
     PlataformaDigital* plataformaDigital;
     std::list<Midia*>* midias;
 
+    std::list<Midia*>* favoritas;
+
 public:
     Assinante();
     Assinante(std::string nome, int codigo);
@@ -24,6 +26,13 @@ public:
     std::list<Midia*>* getMidias();
     void setMidias(std::list<Midia*>* midias);
     void addMidia(Midia* midia);
+    void rmMidia(Midia* midia);
+
+    std::list<Midia*>* getFavoritas();
+    void setFavoritas(std::list<Midia*>* favoritas);
+    void addFavorita(Midia* favorita);
+    void rmFavorita(Midia* favorita);
+    void imprimeFavoritas();
 };
 
 #endif

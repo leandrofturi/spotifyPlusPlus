@@ -15,7 +15,7 @@ private:
 
 public:
     Podcast();
-    Podcast(std::string nome, bool explicito, Genero* genero, int qtdTemporadas);
+    Podcast(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero, int qtdTemporadas);
     ~Podcast();
 
     int getQtdTemporadas();
@@ -23,6 +23,8 @@ public:
 
     Podcaster* getPodcaster();
     void setPodcaster(Podcaster* podcaster);
+
+    void imprimeInfoProduto();
 };
 
 #endif

@@ -33,6 +33,7 @@ public:
     std::list<Musica*>* getMusicas();
     void setMusicas(std::list<Musica*>* musicas);
     void addMusica(Musica* musica);
+    void rmMusica(Musica* musica);
     Artista* getArtista();
     void setArtista(Artista* artista);
 };

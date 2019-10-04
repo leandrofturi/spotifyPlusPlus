@@ -19,6 +19,7 @@ public:
     std::list<Podcast*>* getPodcasts();
     void setPodcasts(std::list<Podcast*>* podcasts);
     void addPodcast(Podcast* podcast);
+    void rmPodcast(Podcast* podcast);
 };
 
 #endif

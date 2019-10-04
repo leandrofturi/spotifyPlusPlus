@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <list>
-#include "Produtor.hpp"
+
+class Produtor;
 
 class Midia
 {
@@ -14,6 +15,8 @@ public:
         std::string nome;
         std::string sigla;
 
+        std::list<Midia*>* midias;
+
     public:
         Genero();
         Genero(std::string nome, std::string sigla);
@@ -23,31 +26,43 @@ public:
         void setNome(std::string nome);
         std::string getSigla();
         void setSigla(std::string sigla);
+
+        std::list<Midia*>* getMidias();
+        void setMidias(std::list<Midia*>* midias);
+        void addMidia(Midia* midia);
+        void rmMidia(Midia* midia);
     };
 
 protected:
     std::string nome;
+    int codigo;
+    int duracao;
+    int anoLancamento;
 
-private:
-    bool explicito;
-
+    Midia::Genero *genero;
     std::list<Produtor*>* produtores;
 
 public:
-    Genero* genero;
-
     int qtdProdutos;
 
     Midia();
-    Midia(std::string nome, bool explicito, Genero* genero);
+    Midia(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero);
     ~Midia();
 
     std::string getNome();
     void setNome(std::string nome);
-    bool getExplicito();
-    void setExplicito(bool explicito);
-    int getQtdProdutos();
+    int getCodigo();
+    void setCodigo(int codigo);
+    int getDuracao();
+    void setDuracao(int duracao);
+    int getAnoLancamento();
+    void setAnoLancamento(int anoLancamento);
 
+    void imprimeQtdProdutos();
+    virtual void imprimeInfoProduto() = 0;
+
+    Midia::Genero* getGenero();
+    void setGenero(Midia::Genero* genero);
     std::list<Produtor*>* getProdutores();
     void setProdutores(std::list<Produtor*>* produtores);
     void addProdutor(Produtor* produtor);
