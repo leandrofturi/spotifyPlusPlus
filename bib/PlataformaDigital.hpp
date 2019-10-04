@@ -25,10 +25,12 @@ public:
     std::string getNome();
     void setNome(std::string nome);
 
+    void imprimeProdutosPorGenero(Midia::Genero* genero);
     std::list<Assinante*>* getAssinantes();
     void setAssinantes(std::list<Assinante*>* assinantes);
     void addAssinante(Assinante* assinante);
     void rmAssinante(Assinante* assinante);
+    void imprimeAssinantes();
     std::list<Produtor*>* getProdutores();
     void setProdutores(std::list<Produtor*>* produtores);
     void addProdutor(Produtor* produtor);
@@ -37,6 +39,7 @@ public:
     void setMidias(std::list<Midia*>* midias);
     void addMidia(Midia* midia);
     void rmMidia(Midia* midia);
+    void insereProduto(Midia* midia, std::list<Produtor*>* produtores);
     std::list<Midia::Genero*>* getGeneros();
     void setGeneros(std::list<Midia::Genero*>* generos);
     void addGenero(Midia::Genero* genero);

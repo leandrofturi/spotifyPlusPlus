@@ -8,7 +8,7 @@
 
 class PlataformaDigital;
 
-class Assinante : private Usuario
+class Assinante : public Usuario
 {
 private:
     PlataformaDigital* plataformaDigital;

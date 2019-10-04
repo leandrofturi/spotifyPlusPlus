@@ -3,7 +3,7 @@
 Podcast::Podcast() {}
 
 Podcast::Podcast(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero, int qtdTemporadas)
-    : Midia(nome, codigo, duracao, anoLancamento, genero)
+    : Midia(nome, codigo, duracao, anoLancamento, 'P', genero)
 {
     this->qtdTemporadas = qtdTemporadas;
 }

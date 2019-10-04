@@ -13,7 +13,7 @@ public:
     {
     private:
         std::string nome;
-        std::string sigla;
+        std::string sigla; // que e isso?
 
         std::list<Midia*>* midias;
 
@@ -38,15 +38,16 @@ protected:
     int codigo;
     int duracao;
     int anoLancamento;
+    char tipo;
 
-    Midia::Genero *genero;
+    Midia::Genero* genero;
     std::list<Produtor*>* produtores;
 
 public:
     int qtdProdutos;
 
     Midia();
-    Midia(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero);
+    Midia(std::string nome, int codigo, int duracao, int anoLancamento, char tipo, Midia::Genero* genero);
     ~Midia();
 
     std::string getNome();
@@ -57,6 +58,7 @@ public:
     void setDuracao(int duracao);
     int getAnoLancamento();
     void setAnoLancamento(int anoLancamento);
+    std::string getTipo();
 
     void imprimeQtdProdutos();
     virtual void imprimeInfoProduto() = 0;
@@ -66,6 +68,7 @@ public:
     std::list<Produtor*>* getProdutores();
     void setProdutores(std::list<Produtor*>* produtores);
     void addProdutor(Produtor* produtor);
+    void rmProdutor(Produtor* produtor);
 };
 
 #endif

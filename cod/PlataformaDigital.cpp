@@ -57,6 +57,46 @@ void PlataformaDigital::setNome(std::string nome)
     this->nome = nome;
 }
 
+void PlataformaDigital::imprimeProdutosPorGenero(Midia::Genero* genero)
+{
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Midias do genero " << genero->getNome() << ":" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Musicas" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    
+    std::list<Midia*>::iterator aux1;
+    for(aux1 = this->midias->begin(); aux1 != this->midias->end(); aux1 ++)
+    {
+        if(((*aux1)->getGenero()->getNome() == genero->getNome()) && ((*aux1)->getGenero()->getSigla() == genero->getSigla()))
+        {
+            if ((*aux1)->getTipo() == "Musica")
+            {
+                std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
+                std::cout << "Genero: " << (*aux1)->getGenero()->getNome() << std::endl;
+                std::cout << "Duracao: " << (*aux1)->getDuracao() << std::endl;
+                std::cout << std::endl;
+            }
+        }
+    }
+    std::cout << "################################" << std::endl << std::endl;
+    std::cout << "Podcasts" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    for(aux1 = this->midias->begin(); aux1 != this->midias->end(); aux1 ++)
+    {
+        if(((*aux1)->getGenero()->getNome() == genero->getNome()) && ((*aux1)->getGenero()->getSigla() == genero->getSigla()))
+        {
+            if ((*aux1)->getTipo() == "Podcast")
+            {
+                std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
+                std::cout << "Genero: " << (*aux1)->getGenero()->getNome() << std::endl;
+                std::cout << "Duracao: " << (*aux1)->getDuracao() << std::endl;
+                std::cout << std::endl;
+            }
+        }
+    }
+}
+
 std::list<Assinante*>* PlataformaDigital::getAssinantes()
 {
     return this->assinantes;
@@ -75,6 +115,21 @@ void PlataformaDigital::addAssinante(Assinante* assinante)
 void PlataformaDigital::rmAssinante(Assinante* assinante)
 {
     this->assinantes->remove(assinante);
+}
+
+void PlataformaDigital::imprimeAssinantes()
+{
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Assinantes de " << this->getNome() << ":" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+
+    std::list<Assinante*>::iterator aux1;
+    for(aux1 = this->assinantes->begin(); aux1 != this->assinantes->end(); aux1 ++)
+    {
+        std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
+        std::cout << std::endl;
+    }
+    std::cout << "################################" << std::endl << std::endl;
 }
 
 std::list<Produtor*>* PlataformaDigital::getProdutores()
@@ -115,6 +170,12 @@ void PlataformaDigital::addMidia(Midia* midia)
 void PlataformaDigital::rmMidia(Midia* midia)
 {
     this->midias->remove(midia);
+}
+
+void PlataformaDigital::insereProduto(Midia* midia, std::list<Produtor*>* produtores)
+{
+    midia->setProdutores(produtores);
+    this->midias->push_back(midia);
 }
 
 std::list<Midia::Genero*>* PlataformaDigital::getGeneros()

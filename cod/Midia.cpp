@@ -67,12 +67,13 @@ Midia::Midia()
     this->produtores = new std::list<Produtor*>;
 }
 
-Midia::Midia(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero)
+Midia::Midia(std::string nome, int codigo, int duracao, int anoLancamento, char tipo, Midia::Genero* genero)
 {
     this->nome = nome;
     this->codigo = codigo;
     this->duracao = duracao;
     this->anoLancamento = anoLancamento;
+    this->tipo = tipo;
 
     this->genero = genero;
 
@@ -128,6 +129,19 @@ void Midia::setAnoLancamento(int anoLancamento)
     this->anoLancamento = anoLancamento;
 }
 
+std::string Midia::getTipo()
+{
+    if(this->tipo == 'M')
+    {
+        return "Musica";
+    }
+    else if(this->tipo == 'P')
+    {
+        return "Podcast";
+    }
+    return "Indefinido";
+}
+
 void Midia::imprimeQtdProdutos()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
@@ -159,4 +173,9 @@ void Midia::setProdutores(std::list<Produtor*>* produtores)
 void Midia::addProdutor(Produtor* produtor)
 {
     this->produtores->push_back(produtor);
+}
+
+void Midia::rmProdutor(Produtor* produtor)
+{
+    this->produtores->remove(produtor);
 }

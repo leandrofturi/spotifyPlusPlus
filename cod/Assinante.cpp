@@ -80,22 +80,26 @@ void Assinante::imprimeFavoritas()
     std::list<Midia*>::iterator aux1;
     for(aux1 = this->favoritas->begin(); aux1 != this->favoritas->end(); aux1 ++)
     {
-        // if (tipo == M)tipo
+        if ((*aux1)->getTipo() == "Musica")
+        {
             std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
             std::cout << "Genero: " << (*aux1)->getGenero()->getNome() << std::endl;
             std::cout << "Duracao: " << (*aux1)->getDuracao() << std::endl;
             std::cout << std::endl;
+        }
     }
     std::cout << "################################" << std::endl << std::endl;
     std::cout << "Podcasts" << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
     for(aux1 = this->favoritas->begin(); aux1 != this->favoritas->end(); aux1 ++)
     {
-        // if (tipo == P)tipo
+        if ((*aux1)->getTipo() == "Podcast")
+        {
             std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
             std::cout << "Genero: " << (*aux1)->getGenero()->getNome() << std::endl;
             std::cout << "Duracao: " << (*aux1)->getDuracao() << std::endl;
             std::cout << std::endl;
+        }
     }
     std::cout << "################################" << std::endl << std::endl;
 }
