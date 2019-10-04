@@ -57,7 +57,7 @@ void PlataformaDigital::setNome(std::string nome)
     this->nome = nome;
 }
 
-void PlataformaDigital::imprimeProdutosPorGenero(Midia::Genero* genero)
+void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
     std::cout << "Midias do genero " << genero->getNome() << ":" << std::endl;
@@ -172,7 +172,7 @@ void PlataformaDigital::rmMidia(Midia* midia)
     this->midias->remove(midia);
 }
 
-void PlataformaDigital::insereProduto(Midia* midia, std::list<Produtor*>* produtores)
+void PlataformaDigital::addMidia(Midia* midia, std::list<Produtor*>* produtores)
 {
     midia->setProdutores(produtores);
     this->midias->push_back(midia);

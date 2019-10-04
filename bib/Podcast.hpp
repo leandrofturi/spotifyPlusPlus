@@ -24,7 +24,7 @@ public:
     Podcaster* getPodcaster();
     void setPodcaster(Podcaster* podcaster);
 
-    void imprimeInfoProduto();
+    void imprimeInfoMidia();
 };
 
 #endif

@@ -44,7 +44,7 @@ protected:
     std::list<Produtor*>* produtores;
 
 public:
-    int qtdProdutos;
+    int qtdMidias;
 
     Midia();
     Midia(std::string nome, int codigo, int duracao, int anoLancamento, char tipo, Midia::Genero* genero);
@@ -60,8 +60,8 @@ public:
     void setAnoLancamento(int anoLancamento);
     std::string getTipo();
 
-    void imprimeQtdProdutos();
-    virtual void imprimeInfoProduto() = 0;
+    void imprimeQtdMidias();
+    virtual void imprimeInfoMidia() = 0;
 
     Midia::Genero* getGenero();
     void setGenero(Midia::Genero* genero);

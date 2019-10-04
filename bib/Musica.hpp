@@ -19,7 +19,7 @@ public:
     Album* getAlbum();
     void setAlbum(Album* album);
 
-    void imprimeInfoProduto();
+    void imprimeInfoMidia();
 };
 
 #endif

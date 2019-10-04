@@ -17,7 +17,7 @@ void Musica::setAlbum(Album* album)
     this->album = album;
 }
 
-void Musica::imprimeInfoProduto()
+void Musica::imprimeInfoMidia()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
     std::cout << "Musica" << std::endl;

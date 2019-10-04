@@ -30,7 +30,7 @@ void Podcast::setPodcaster(Podcaster* podcaster)
     this->podcaster = podcaster;
 }
 
-void Podcast::imprimeInfoProduto()
+void Podcast::imprimeInfoMidia()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
     std::cout << "Podcast" << std::endl;

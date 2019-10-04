@@ -58,11 +58,11 @@ void Midia::Genero::setSigla(std::string sigla)
     this->sigla = sigla;
 }
 
-int qtdProdutos = 0;
+int qtdMidias = 0;
 
 Midia::Midia()
 {
-    this->qtdProdutos ++;
+    this->qtdMidias ++;
 
     this->produtores = new std::list<Produtor*>;
 }
@@ -77,14 +77,14 @@ Midia::Midia(std::string nome, int codigo, int duracao, int anoLancamento, char 
 
     this->genero = genero;
 
-    this->qtdProdutos ++;
+    this->qtdMidias ++;
 
     this->produtores = new std::list<Produtor*>;
 }
 
 Midia::~Midia()
 {
-    this->qtdProdutos --;
+    this->qtdMidias --;
 
     delete this->produtores;
 }
@@ -142,11 +142,11 @@ std::string Midia::getTipo()
     return "Indefinido";
 }
 
-void Midia::imprimeQtdProdutos()
+void Midia::imprimeQtdMidias()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
     std::cout << "Quantidade de produtos de " << this->getNome() << ":" << std::endl;
-    std::cout << this->qtdProdutos << std::endl;
+    std::cout << this->qtdMidias << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
 }
 
