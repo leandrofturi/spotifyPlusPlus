@@ -197,3 +197,115 @@ void PlataformaDigital::rmGenero(Midia::Genero* genero)
 {
     this->generos->remove(genero);
 }
+
+void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
+{
+    if(!file.is_open())
+    {
+        return;
+    }
+    std::string palavra;
+    int codigo;
+    char tipo;
+    std::string nome;
+
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while(!file.eof())
+    {
+	    if(file.peek() < 32)
+	    {
+		    file.ignore(std::numeric_limits<std::streamsize>::max(), (char) file.peek());
+	    }
+        else
+        {
+            getline(file, palavra, ';');
+            // TESTAR SE E NUMERO
+            codigo = std::stoi(palavra);
+            getline(file, palavra, ';');
+            // TESTAR
+            tipo = palavra[0];
+            getline(file, palavra, '\n');
+            nome = palavra;
+            
+            Usuario *usuario;
+            if(tipo == 'P')
+            {
+                usuario = new Podcaster(nome, codigo);
+                this->addProdutor((Podcaster*) usuario);
+            }
+            else if(tipo == 'U')
+            {
+                usuario = new Assinante(nome, codigo);
+                this->addAssinante((Assinante*) usuario);
+            }
+            else if(tipo == 'A')
+            {
+                usuario = new Artista(nome, codigo);
+                this->addProdutor((Artista*) usuario);
+            }
+        }
+    }
+}
+
+void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
+{
+    if(!file.is_open())
+    {
+        return;
+    }
+    std::string palavra;
+    std::string sigla, nome;
+
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while(!file.eof())
+    {
+	    if(file.peek() < 32)
+	    {
+		    file.ignore(std::numeric_limits<std::streamsize>::max(), (char) file.peek());
+	    }
+        else
+        {
+            getline(file, palavra, ';');
+            sigla = palavra;
+            getline(file, palavra, '\n');
+            nome = palavra;
+            
+            Midia::Genero* genero;
+            genero = new Midia::Genero(nome, sigla);
+            this->addGenero(genero);
+        }
+    }
+}
+
+void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
+{
+
+}
+
+void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
+{
+    if(!file.is_open())
+    {
+        return;
+    }
+
+    std::string palavra;
+    int codigo;
+    std::vector<int> midias;
+
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while(!file.eof())
+    {
+	    if(file.peek() < 32)
+	    {
+		    file.ignore(std::numeric_limits<std::streamsize>::max(), (char) file.peek());
+	    }
+        else
+        {
+            getline(file, palavra, ';');
+            codigo = std::stoi(palavra);
+            // ler o vetor de numeros
+            
+        }
+    }
+}

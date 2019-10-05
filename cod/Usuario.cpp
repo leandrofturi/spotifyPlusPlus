@@ -29,3 +29,10 @@ void Usuario::setCodigo(int codigo)
 {
     this->codigo = codigo;
 }
+
+void imprimeNoArquivo(std::ofstream& file)
+{
+    file.open("test.txt", std::ofstream::out | std::ofstream::app);
+    file << "kkkkkk";
+    file.close();
+}

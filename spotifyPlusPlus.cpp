@@ -9,7 +9,6 @@
 #include "bib/Produtor.hpp"
 #include "bib/Usuario.hpp"
 
-
 int main ()
 {
     return 0;

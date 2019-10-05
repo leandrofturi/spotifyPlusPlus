@@ -2,6 +2,7 @@
 #define _USUARIO_HPP_
 
 #include <iostream>
+#include <fstream>
 
 class Usuario
 {
@@ -18,6 +19,8 @@ public:
     void setNome(std::string nome);
     int getCodigo();
 	void setCodigo(int codigo);
+
+    void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

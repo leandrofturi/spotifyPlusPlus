@@ -2,8 +2,13 @@
 #define _PLATAFORMADIGITAL_HPP_
 
 #include <iostream>
+#include <fstream>
+#include <limits>
 #include <list>
+#include <vector>
 #include "Produtor.hpp"
+#include "Podcaster.hpp"
+#include "Artista.hpp"
 #include "Midia.hpp"
 #include "Assinante.hpp"
 
@@ -44,6 +49,11 @@ public:
     void setGeneros(std::list<Midia::Genero*>* generos);
     void addGenero(Midia::Genero* genero);
     void rmGenero(Midia::Genero* genero);
+
+    void carregaArquivoUsuarios(std::ifstream& file);
+    void carregaArquivoGeneros(std::ifstream& file);
+    void carregaArquivoMidias(std::ifstream& file);
+    void carregaArquivoFavoritos(std::ifstream& file);
 };
 
 #endif
