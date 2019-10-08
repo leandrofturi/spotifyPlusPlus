@@ -204,45 +204,43 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
     {
         return;
     }
-    std::string palavra;
-    int codigo;
-    char tipo;
-    std::string nome;
+    int col;
+    std::string linha;
+    std::vector<std::string> cel;
 
-    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    getline(file, linha);
+	cpp_util::Tokenizer tok(linha, ';');
+    col = tok.remaining().size();
+    
     while(!file.eof())
     {
-	    if(file.peek() < 32)
-	    {
-		    file.ignore(std::numeric_limits<std::streamsize>::max(), (char) file.peek());
-	    }
-        else
+        getline(file, linha);
+        tok.overwriteStream(linha);
+        cel = tok.remaining();
+        if(cel.size() != col)
         {
-            getline(file, palavra, ';');
-            // TESTAR SE E NUMERO
-            codigo = std::stoi(palavra);
-            getline(file, palavra, ';');
-            // TESTAR
-            tipo = palavra[0];
-            getline(file, palavra, '\n');
-            nome = palavra;
-            
-            Usuario *usuario;
-            if(tipo == 'P')
-            {
-                usuario = new Podcaster(nome, codigo);
-                this->addProdutor((Podcaster*) usuario);
-            }
-            else if(tipo == 'U')
-            {
-                usuario = new Assinante(nome, codigo);
-                this->addAssinante((Assinante*) usuario);
-            }
-            else if(tipo == 'A')
-            {
-                usuario = new Artista(nome, codigo);
-                this->addProdutor((Artista*) usuario);
-            }
+            return;
+        }
+        if(!cpp_util::isNumber(cel[0]))
+        {
+            return;
+        }
+
+        Usuario *usuario;
+        if(cel[1] == "P")
+        {
+            usuario = new Podcaster(cel[2], stoi(cel[0]));
+            this->addProdutor((Podcaster*) usuario);
+        }
+        else if(cel[1] == "U")
+        {
+            usuario = new Assinante(cel[2], stoi(cel[0]));
+            this->addAssinante((Assinante*) usuario);
+        }
+        else if(cel[1] == "A")
+        {
+            usuario = new Artista(cel[2], stoi(cel[0]));
+            this->addProdutor((Artista*) usuario);
         }
     }
 }
@@ -253,27 +251,27 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
     {
         return;
     }
-    std::string palavra;
-    std::string sigla, nome;
+    int col;
+    std::string linha;
+    std::vector<std::string> cel;
 
-    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    getline(file, linha);
+	cpp_util::Tokenizer tok(linha, ';');
+    col = tok.remaining().size();
+    
     while(!file.eof())
     {
-	    if(file.peek() < 32)
-	    {
-		    file.ignore(std::numeric_limits<std::streamsize>::max(), (char) file.peek());
-	    }
-        else
+        getline(file, linha);
+        tok.overwriteStream(linha);
+        cel = tok.remaining();
+        if(cel.size() != col)
         {
-            getline(file, palavra, ';');
-            sigla = palavra;
-            getline(file, palavra, '\n');
-            nome = palavra;
-            
-            Midia::Genero* genero;
-            genero = new Midia::Genero(nome, sigla);
-            this->addGenero(genero);
+            return;
         }
+        
+        Midia::Genero* genero;
+        genero = new Midia::Genero(cel[0], cel[1]);
+        this->addGenero(genero);
     }
 }
 
@@ -288,24 +286,57 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
     {
         return;
     }
+    int col;
+    std::string linha;
+    std::vector<std::string> cel;
+    std::list<Assinante*>::iterator itAss;
+    std::list<Midia*>::iterator itMid;
 
-    std::string palavra;
-    int codigo;
-    std::vector<int> midias;
-
-    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    getline(file, linha);
+	cpp_util::Tokenizer tok(linha, ';');
+    col = tok.remaining().size();
+    
     while(!file.eof())
     {
-	    if(file.peek() < 32)
-	    {
-		    file.ignore(std::numeric_limits<std::streamsize>::max(), (char) file.peek());
-	    }
+        getline(file, linha);
+        tok.overwriteStream(linha);
+        cel = tok.remaining();
+        if(cel.size() != col)
+        {
+            return;
+        }
+        if(!cpp_util::isNumber(cel[0]))
+        {
+            return;
+        }
+        //itAss = find_if(this->assinantes->begin(), this->assinantes->end(), stoi(cel[0]));
+        if(itAss == this->assinantes->end())
+        {
+            return;
+        }
         else
         {
-            getline(file, palavra, ';');
-            codigo = std::stoi(palavra);
-            // ler o vetor de numeros
-            
+            cpp_util::Tokenizer newTok(cel[1], ',');
+            cel.clear();
+            cel = newTok.remaining();
+            for (std::string s : cel)
+            {
+                if(!cpp_util::isNumber(s))
+                {
+                    return;
+                }
+                //itMid = find_if(this->midias->begin(), this->midias->end(), stoi(s));
+                if(itMid == this->midias->end())
+                {
+                    //return;
+                }
+                else
+                {
+                    (*itAss)->addFavorita(*itMid);
+                }
+            }
         }
     }
 }
+
+//file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

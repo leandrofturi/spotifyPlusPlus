@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <algorithm>
 #include <list>
 #include <vector>
 #include "Produtor.hpp"
@@ -11,6 +12,8 @@
 #include "Artista.hpp"
 #include "Midia.hpp"
 #include "Assinante.hpp"
+#include "../cpp-utils/util/StringUtils.h"
+#include "../cpp-utils/util/Tokenizer.h"
 
 class PlataformaDigital
 {
