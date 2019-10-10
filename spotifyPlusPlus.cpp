@@ -20,10 +20,11 @@
 
 int main ()
 {
-    std::ifstream file;
-    file.open("entradas/favoritos.csv");
+    //std::ifstream file;
+    //file.open("entradas/favoritos.csv");
     //carregaArquivoFavoritos(file);
-    file.close();
-
+    //file.close();
+    std::string n = {"4.17"};
+    std::cout << cpp_util::isNumber(n);
     return 0;
 }

@@ -12,7 +12,6 @@ class Assinante : public Usuario
 {
 private:
     PlataformaDigital* plataformaDigital;
-    std::list<Midia*>* midias;
 
     std::list<Midia*>* favoritas;
 
@@ -23,11 +22,6 @@ public:
 
     PlataformaDigital* getPlataformaDigital();
     void setPlataformaDigital(PlataformaDigital* plataformaDigital);
-    std::list<Midia*>* getMidias();
-    void setMidias(std::list<Midia*>* midias);
-    void addMidia(Midia* midia);
-    void rmMidia(Midia* midia);
-
     std::list<Midia*>* getFavoritas();
     void setFavoritas(std::list<Midia*>* favoritas);
     void addFavorita(Midia* favorita);

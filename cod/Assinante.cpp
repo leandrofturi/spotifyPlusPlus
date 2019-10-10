@@ -2,20 +2,17 @@
 
 Assinante::Assinante()
 {
-    this->midias = new std::list<Midia*>;
     this->favoritas = new std::list<Midia*>;
 }
 
 Assinante::Assinante(std::string nome, int codigo)
     : Usuario(nome, codigo)
 {
-    this->midias = new std::list<Midia*>;
     this->favoritas = new std::list<Midia*>;
 }
 
 Assinante::~Assinante()
 {
-    delete this->midias;
     delete this->favoritas;
 }
 
@@ -27,26 +24,6 @@ PlataformaDigital* Assinante::getPlataformaDigital()
 void Assinante::setPlataformaDigital(PlataformaDigital* plataformaDigital)
 {
     this->plataformaDigital = plataformaDigital;
-}
-
-std::list<Midia*>* Assinante::getMidias()
-{
-    return this->midias;
-}
-
-void Assinante::setMidias(std::list<Midia*> *midias)
-{
-    this->midias = midias;
-}
-
-void Assinante::addMidia(Midia* midia)
-{
-    this->midias->push_back(midia);
-}
-
-void Assinante::rmMidia(Midia* midia)
-{
-    this->midias->remove(midia);
 }
 
 std::list<Midia*>* Assinante::getFavoritas()

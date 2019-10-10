@@ -20,28 +20,10 @@ PlataformaDigital::PlataformaDigital(std::string nome)
 
 PlataformaDigital::~PlataformaDigital()
 {
-    std::list<Assinante*>::iterator aux1;
-    for(aux1 = this->assinantes->begin(); aux1 != this->assinantes->end(); aux1 ++)
-    {
-        delete *aux1;
-    }
-    std::list<Produtor*>::iterator aux2;
-    for(aux2 = this->produtores->begin(); aux2 != this->produtores->end(); aux2 ++)
-    {
-        delete *aux2;
-    }
-    std::list<Midia*>::iterator aux3;
-    for(aux3 = this->midias->begin(); aux3 != this->midias->end(); aux3 ++)
-    {
-        delete *aux3;
-    }
-    std::list<Midia::Genero*>::iterator aux4;
-    for(aux4 = this->generos->begin(); aux4 != this->generos->end(); aux4 ++)
-    {
-        delete *aux4;
-    }
+    for(Produtor* aux : *(this->produtores)) delete aux;
+    for(Midia* aux : *(this->midias)) delete aux;
+    for(Midia::Genero* aux : *(this->generos)) delete aux;
 
-    delete this->assinantes;
     delete this->produtores;
     delete this->midias;
     delete this->generos;
@@ -57,54 +39,9 @@ void PlataformaDigital::setNome(std::string nome)
     this->nome = nome;
 }
 
-void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
-{
-    std::cout << std::endl << "################################" << std::endl << std::endl;
-    std::cout << "Midias do genero " << genero->getNome() << ":" << std::endl;
-    std::cout << std::endl << "################################" << std::endl << std::endl;
-    std::cout << "Musicas" << std::endl;
-    std::cout << std::endl << "################################" << std::endl << std::endl;
-    
-    std::list<Midia*>::iterator aux1;
-    for(aux1 = this->midias->begin(); aux1 != this->midias->end(); aux1 ++)
-    {
-        if(((*aux1)->getGenero()->getNome() == genero->getNome()) && ((*aux1)->getGenero()->getSigla() == genero->getSigla()))
-        {
-            if ((*aux1)->getTipo() == "Musica")
-            {
-                std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
-                std::cout << "Genero: " << (*aux1)->getGenero()->getNome() << std::endl;
-                std::cout << "Duracao: " << (*aux1)->getDuracao() << std::endl;
-                std::cout << std::endl;
-            }
-        }
-    }
-    std::cout << "################################" << std::endl << std::endl;
-    std::cout << "Podcasts" << std::endl;
-    std::cout << std::endl << "################################" << std::endl << std::endl;
-    for(aux1 = this->midias->begin(); aux1 != this->midias->end(); aux1 ++)
-    {
-        if(((*aux1)->getGenero()->getNome() == genero->getNome()) && ((*aux1)->getGenero()->getSigla() == genero->getSigla()))
-        {
-            if ((*aux1)->getTipo() == "Podcast")
-            {
-                std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
-                std::cout << "Genero: " << (*aux1)->getGenero()->getNome() << std::endl;
-                std::cout << "Duracao: " << (*aux1)->getDuracao() << std::endl;
-                std::cout << std::endl;
-            }
-        }
-    }
-}
-
 std::list<Assinante*>* PlataformaDigital::getAssinantes()
 {
     return this->assinantes;
-}
-
-void PlataformaDigital::setAssinantes(std::list<Assinante*>* assinantes)
-{
-    this->assinantes = assinantes;
 }
 
 void PlataformaDigital::addAssinante(Assinante* assinante)
@@ -117,16 +54,21 @@ void PlataformaDigital::rmAssinante(Assinante* assinante)
     this->assinantes->remove(assinante);
 }
 
+bool PlataformaDigital::isAssinante(Assinante* assinante)
+{
+    std::list<Assinante*>::iterator it = find(this->assinantes->begin(), this->assinantes->end(), assinante);
+    return it != this->assinantes->end();
+}
+
 void PlataformaDigital::imprimeAssinantes()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
     std::cout << "Assinantes de " << this->getNome() << ":" << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
 
-    std::list<Assinante*>::iterator aux1;
-    for(aux1 = this->assinantes->begin(); aux1 != this->assinantes->end(); aux1 ++)
+    for(Assinante* aux : *this->assinantes)
     {
-        std::cout << "Nome: " << (*aux1)->getNome() << std::endl;
+        std::cout << "Nome: " << aux->getNome() << std::endl;
         std::cout << std::endl;
     }
     std::cout << "################################" << std::endl << std::endl;
@@ -135,11 +77,6 @@ void PlataformaDigital::imprimeAssinantes()
 std::list<Produtor*>* PlataformaDigital::getProdutores()
 {
     return this->produtores;
-}
-
-void PlataformaDigital::setProdutores(std::list<Produtor*>* produtores)
-{
-    this->produtores = produtores;
 }
 
 void PlataformaDigital::addProdutor(Produtor* produtor)
@@ -152,24 +89,15 @@ void PlataformaDigital::rmProdutor(Produtor* produtor)
     this->produtores->remove(produtor);
 }
 
+bool PlataformaDigital::isProdutor(Produtor* produtor)
+{
+    std::list<Produtor*>::iterator it = find(this->produtores->begin(), this->produtores->end(), produtor);
+    return it != this->produtores->end();
+}
+
 std::list<Midia*>* PlataformaDigital::getMidias()
 {
     return this->midias;
-}
-
-void PlataformaDigital::setMidias(std::list<Midia*>* midias)
-{
-    this->midias = midias;
-}
-
-void PlataformaDigital::addMidia(Midia* midia)
-{
-    this->midias->push_back(midia);
-}
-
-void PlataformaDigital::rmMidia(Midia* midia)
-{
-    this->midias->remove(midia);
 }
 
 void PlataformaDigital::addMidia(Midia* midia, std::list<Produtor*>* produtores)
@@ -178,14 +106,20 @@ void PlataformaDigital::addMidia(Midia* midia, std::list<Produtor*>* produtores)
     this->midias->push_back(midia);
 }
 
+void PlataformaDigital::rmMidia(Midia* midia)
+{
+    this->midias->remove(midia);
+}
+
+bool PlataformaDigital::isMidia(Midia* midia)
+{
+    std::list<Midia*>::iterator it = find(this->midias->begin(), this->midias->end(), midia);
+    return it != this->midias->end();
+}
+
 std::list<Midia::Genero*>* PlataformaDigital::getGeneros()
 {
     return this->generos;
-}
-
-void PlataformaDigital::setGeneros(std::list<Midia::Genero*>* generos)
-{
-    this->generos = generos;
 }
 
 void PlataformaDigital::addGenero(Midia::Genero* genero)
@@ -198,10 +132,56 @@ void PlataformaDigital::rmGenero(Midia::Genero* genero)
     this->generos->remove(genero);
 }
 
+bool PlataformaDigital::isGenero(Midia::Genero* genero)
+{
+    std::list<Midia::Genero*>::iterator it = find(this->generos->begin(), this->generos->end(), genero);
+    return it != this->generos->end();
+}
+
+void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
+{
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Midias do genero " << genero->getNome() << ":" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Musicas" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    
+    for(Midia* aux : *this->midias)
+    {
+        if((aux->getGenero()->getNome() == genero->getNome()) && (aux->getGenero()->getSigla() == genero->getSigla()))
+        {
+            if (aux->getTipo() == "Musica")
+            {
+                std::cout << "Nome: " << aux->getNome() << std::endl;
+                std::cout << "Genero: " << aux->getGenero()->getNome() << std::endl;
+                std::cout << "Duracao: " << aux->getDuracao() << std::endl;
+                std::cout << std::endl;
+            }
+        }
+    }
+    std::cout << "################################" << std::endl << std::endl;
+    std::cout << "Podcasts" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    for(Midia* aux : *this->midias)
+    {
+        if((aux->getGenero()->getNome() == genero->getNome()) && (aux->getGenero()->getSigla() == genero->getSigla()))
+        {
+            if (aux->getTipo() == "Podcast")
+            {
+                std::cout << "Nome: " << aux->getNome() << std::endl;
+                std::cout << "Genero: " << aux->getGenero()->getNome() << std::endl;
+                std::cout << "Duracao: " << aux->getDuracao() << std::endl;
+                std::cout << std::endl;
+            }
+        }
+    }
+}
+
 void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
 {
     if(!file.is_open())
     {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
     int col;
@@ -219,10 +199,12 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
         cel = tok.remaining();
         if(cel.size() != col)
         {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
             return;
         }
         if(!cpp_util::isNumber(cel[0]))
         {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
             return;
         }
 
@@ -249,6 +231,7 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
 {
     if(!file.is_open())
     {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
     int col;
@@ -266,6 +249,7 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
         cel = tok.remaining();
         if(cel.size() != col)
         {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
             return;
         }
         
@@ -277,20 +261,14 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
 
 void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
 {
-
-}
-
-void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
-{
     if(!file.is_open())
     {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
     int col;
     std::string linha;
     std::vector<std::string> cel;
-    std::list<Assinante*>::iterator itAss;
-    std::list<Midia*>::iterator itMid;
 
     getline(file, linha);
 	cpp_util::Tokenizer tok(linha, ';');
@@ -303,39 +281,88 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
         cel = tok.remaining();
         if(cel.size() != col)
         {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
+            return;
+        }
+        /*
+            0- codigo (int)
+            1- nome (string)
+            2- tipo (string)
+            3- produtores (vector int)
+            4- duracao (vector int)
+            5- genero (vector string)
+            6- temporada (int)
+            7- album (string)
+            8- publicacao (int)
+        */
+
+        if(!cpp_util::isNumber(cel[0]))
+        {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
+            return;
+        }
+    }
+}
+
+void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+    int col;
+    std::string linha;
+    std::vector<std::string> cel;
+
+    getline(file, linha);
+	cpp_util::Tokenizer tok(linha, ';');
+    col = tok.remaining().size();
+    
+    while(!file.eof())
+    {
+        getline(file, linha);
+        tok.overwriteStream(linha);
+        cel = tok.remaining();
+        if(cel.size() != col)
+        {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
             return;
         }
         if(!cpp_util::isNumber(cel[0]))
         {
+            std::cout << "ERRO! Formato invalido!" << std::endl;
             return;
         }
-        //itAss = find_if(this->assinantes->begin(), this->assinantes->end(), stoi(cel[0]));
-        if(itAss == this->assinantes->end())
+        for(Assinante* aux : *this->assinantes)
         {
-            return;
-        }
-        else
-        {
-            cpp_util::Tokenizer newTok(cel[1], ',');
-            cel.clear();
-            cel = newTok.remaining();
-            for (std::string s : cel)
+            if(aux->getCodigo() == stoi(cel[0]))
             {
-                if(!cpp_util::isNumber(s))
+                cpp_util::Tokenizer newTok(cel[1], ',');
+                cel.clear();
+                cel = newTok.remaining();
+                for (std::string s : cel)
                 {
+                    if(!cpp_util::isNumber(s))
+                    {
+                        std::cout << "ERRO! Formato invalido!" << std::endl;
+                        return;
+                    }
+                    for(Midia* aux2 : *this->midias)
+                    {
+                        if(aux2->getCodigo() == stoi(s))
+                        {
+                            aux->addFavorita(aux2);
+                            return;
+                        }
+                    }
+                    std::cout << "ERRO! Midia nao encontrada!" << std::endl;
                     return;
-                }
-                //itMid = find_if(this->midias->begin(), this->midias->end(), stoi(s));
-                if(itMid == this->midias->end())
-                {
-                    //return;
-                }
-                else
-                {
-                    (*itAss)->addFavorita(*itMid);
                 }
             }
         }
+        std::cout << "ERRO! Assinante nao encontrado!" << std::endl;
+        return;
     }
 }
 

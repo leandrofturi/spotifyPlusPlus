@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <limits>
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -33,25 +32,29 @@ public:
     std::string getNome();
     void setNome(std::string nome);
 
-    void imprimeMidiasPorGenero(Midia::Genero* genero);
     std::list<Assinante*>* getAssinantes();
-    void setAssinantes(std::list<Assinante*>* assinantes);
     void addAssinante(Assinante* assinante);
     void rmAssinante(Assinante* assinante);
+    bool isAssinante(Assinante* assinante);
     void imprimeAssinantes();
+    
     std::list<Produtor*>* getProdutores();
-    void setProdutores(std::list<Produtor*>* produtores);
     void addProdutor(Produtor* produtor);
     void rmProdutor(Produtor* produtor);
+    bool isProdutor(Produtor* produtor);
+    //void imprimeProdutores();
+
     std::list<Midia*>* getMidias();
-    void setMidias(std::list<Midia*>* midias);
-    void addMidia(Midia* midia);
-    void rmMidia(Midia* midia);
     void addMidia(Midia* midia, std::list<Produtor*>* produtores);
+    void rmMidia(Midia* midia);
+    bool isMidia(Midia* midia);
+    //void imprimeMidias();
+
     std::list<Midia::Genero*>* getGeneros();
-    void setGeneros(std::list<Midia::Genero*>* generos);
     void addGenero(Midia::Genero* genero);
     void rmGenero(Midia::Genero* genero);
+    bool isGenero(Midia::Genero* genero);
+    void imprimeMidiasPorGenero(Midia::Genero* genero);
 
     void carregaArquivoUsuarios(std::ifstream& file);
     void carregaArquivoGeneros(std::ifstream& file);

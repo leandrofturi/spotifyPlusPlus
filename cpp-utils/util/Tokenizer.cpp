@@ -15,6 +15,7 @@ Tokenizer::Tokenizer(const string& str, char separator): stream(str) {
 	this->separator = separator;
 }
 
+/* Overwrite the stream. */
 void Tokenizer::overwriteStream(const string& str) {
 	stream.clear();
 	stream.str(str);
