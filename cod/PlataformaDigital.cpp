@@ -100,10 +100,9 @@ std::list<Midia*>* PlataformaDigital::getMidias()
     return this->midias;
 }
 
-void PlataformaDigital::addMidia(Midia* midia, std::list<Produtor*>* produtores)
+void PlataformaDigital::addMidia(Midia* midia)
 {
-    midia->setProdutores(produtores);
-    this->midias->push_back(midia);
+    this->addMidia(midia);
 }
 
 void PlataformaDigital::rmMidia(Midia* midia)
@@ -137,13 +136,11 @@ bool PlataformaDigital::isGenero(Midia::Genero* genero)
     std::list<Midia::Genero*>::iterator it = find(this->generos->begin(), this->generos->end(), genero);
     return it != this->generos->end();
 }
-
+/*
 void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
     std::cout << "Midias do genero " << genero->getNome() << ":" << std::endl;
-    std::cout << std::endl << "################################" << std::endl << std::endl;
-    std::cout << "Musicas" << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
     
     for(Midia* aux : *this->midias)
@@ -157,16 +154,7 @@ void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
                 std::cout << "Duracao: " << aux->getDuracao() << std::endl;
                 std::cout << std::endl;
             }
-        }
-    }
-    std::cout << "################################" << std::endl << std::endl;
-    std::cout << "Podcasts" << std::endl;
-    std::cout << std::endl << "################################" << std::endl << std::endl;
-    for(Midia* aux : *this->midias)
-    {
-        if((aux->getGenero()->getNome() == genero->getNome()) && (aux->getGenero()->getSigla() == genero->getSigla()))
-        {
-            if (aux->getTipo() == "Podcast")
+            else if (aux->getTipo() == "Podcast")
             {
                 std::cout << "Nome: " << aux->getNome() << std::endl;
                 std::cout << "Genero: " << aux->getGenero()->getNome() << std::endl;
@@ -175,8 +163,9 @@ void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
             }
         }
     }
+    std::cout << "################################" << std::endl << std::endl;
 }
-
+*/
 void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
 {
     if(!file.is_open())

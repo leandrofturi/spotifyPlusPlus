@@ -1,8 +1,9 @@
 #ifndef _MIDIA_HPP_
 #define _MIDIA_HPP_
 
+// FINALIZADA!
+
 #include <iostream>
-#include <list>
 
 class Produtor;
 
@@ -13,9 +14,7 @@ public:
     {
     private:
         std::string nome;
-        std::string sigla; // que e isso?
-
-        std::list<Midia*>* midias;
+        std::string sigla;
 
     public:
         Genero();
@@ -23,52 +22,41 @@ public:
         ~Genero();
 
         std::string getNome();
-        void setNome(std::string nome);
         std::string getSigla();
-        void setSigla(std::string sigla);
-
-        std::list<Midia*>* getMidias();
-        void setMidias(std::list<Midia*>* midias);
-        void addMidia(Midia* midia);
-        void rmMidia(Midia* midia);
     };
 
 protected:
     std::string nome;
     int codigo;
-    int duracao;
+    float duracao;
     int anoLancamento;
     char tipo;
 
-    Midia::Genero* genero;
-    std::list<Produtor*>* produtores;
+    const Midia::Genero* genero;
 
 public:
     int qtdMidias;
 
     Midia();
-    Midia(std::string nome, int codigo, int duracao, int anoLancamento, char tipo, Midia::Genero* genero);
+    Midia(std::string nome, int codigo, float duracao, int anoLancamento, char tipo, const Midia::Genero* genero);
     ~Midia();
 
     std::string getNome();
     void setNome(std::string nome);
     int getCodigo();
     void setCodigo(int codigo);
-    int getDuracao();
-    void setDuracao(int duracao);
+    float getDuracao();
+    void setDuracao(float duracao);
     int getAnoLancamento();
     void setAnoLancamento(int anoLancamento);
     std::string getTipo();
 
-    void imprimeQtdMidias();
-    virtual void imprimeInfoMidia() = 0;
+    const Midia::Genero* getGenero();
 
-    Midia::Genero* getGenero();
-    void setGenero(Midia::Genero* genero);
-    std::list<Produtor*>* getProdutores();
-    void setProdutores(std::list<Produtor*>* produtores);
-    void addProdutor(Produtor* produtor);
-    void rmProdutor(Produtor* produtor);
+    void imprimeQtdMidias();
+
+    virtual void imprimeInfoMidia() = 0;
+    virtual void imprimeNoArquivo(std::ofstream& file) = 0;
 };
 
 #endif

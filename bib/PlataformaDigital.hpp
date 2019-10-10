@@ -45,7 +45,7 @@ public:
     //void imprimeProdutores();
 
     std::list<Midia*>* getMidias();
-    void addMidia(Midia* midia, std::list<Produtor*>* produtores);
+    void addMidia(Midia* midia);
     void rmMidia(Midia* midia);
     bool isMidia(Midia* midia);
     //void imprimeMidias();
