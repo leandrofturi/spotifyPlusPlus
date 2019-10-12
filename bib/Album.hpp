@@ -1,11 +1,12 @@
 #ifndef _ALBUM_HPP_
 #define _ALBUM_HPP_
 
+// ATRIBUTOS OK
+
 #include <iostream>
 #include <list>
+#include <algorithm>
 #include "Musica.hpp"
-
-class Artista;
 
 class Album
 {
@@ -16,7 +17,6 @@ private:
     int qtdMusicas;
 
     std::list<Musica*>* musicas;
-    Artista *artista;
 
 public:
     Album();
@@ -29,13 +29,12 @@ public:
     void setDuracao(int duracao);
     int getAnoLancamento();
     void setAnoLancamento(int anoLancamento);
+    int getQtdMusicas();
 
     std::list<Musica*>* getMusicas();
-    void setMusicas(std::list<Musica*>* musicas);
     void addMusica(Musica* musica);
     void rmMusica(Musica* musica);
-    Artista* getArtista();
-    void setArtista(Artista* artista);
+    bool isMusica(Musica* musica);
 };
 
 #endif

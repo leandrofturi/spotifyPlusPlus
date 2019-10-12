@@ -1,11 +1,9 @@
 #ifndef _MIDIA_HPP_
 #define _MIDIA_HPP_
 
-// FINALIZADA!
+// ATRIBUTOS OK!
 
 #include <iostream>
-
-class Produtor;
 
 class Midia
 {
@@ -28,33 +26,32 @@ public:
 protected:
     std::string nome;
     int codigo;
-    float duracao;
+    double duracao;
     int anoLancamento;
-    char tipo;
+    std::string tipo;
 
-    const Midia::Genero* genero;
+    Midia::Genero* genero;
 
 public:
     int qtdMidias;
 
     Midia();
-    Midia(std::string nome, int codigo, float duracao, int anoLancamento, char tipo, const Midia::Genero* genero);
+    Midia(std::string nome, int codigo, double duracao, int anoLancamento, Midia::Genero* genero);
     ~Midia();
 
     std::string getNome();
     void setNome(std::string nome);
     int getCodigo();
-    void setCodigo(int codigo);
-    float getDuracao();
-    void setDuracao(float duracao);
+    double getDuracao();
+    void setDuracao(double duracao);
+    std::string formataDuracao();
     int getAnoLancamento();
     void setAnoLancamento(int anoLancamento);
     std::string getTipo();
 
-    const Midia::Genero* getGenero();
+    Midia::Genero* getGenero();
 
     void imprimeQtdMidias();
-
     virtual void imprimeInfoMidia() = 0;
     virtual void imprimeNoArquivo(std::ofstream& file) = 0;
 };

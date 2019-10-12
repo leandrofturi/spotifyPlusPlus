@@ -16,16 +16,6 @@ Podcaster::~Podcaster()
     delete this->podcasts;
 }
 
-std::list<Podcast*>* Podcaster::getPodcasts()
-{
-    return this->podcasts;
-}
-
-void Podcaster::setPodcasts(std::list<Podcast*>* podcasts)
-{
-    this->podcasts = podcasts;
-}
-
 void Podcaster::addPodcast(Podcast* podcast)
 {
     this->podcasts->push_back(podcast);
@@ -34,4 +24,15 @@ void Podcaster::addPodcast(Podcast* podcast)
 void Podcaster::rmPodcast(Podcast* podcast)
 {
     this->podcasts->remove(podcast);
+}
+
+bool Podcaster::isPodcast(Podcast* podcast)
+{
+    std::list<Podcast*>::iterator it = find(this->podcasts->begin(), this->podcasts->end(), podcast);
+    return it != this->podcasts->end();
+}
+
+void Podcaster::imprimeNoArquivo(std::ofstream& file)
+{
+
 }

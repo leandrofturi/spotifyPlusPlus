@@ -20,11 +20,29 @@
 
 int main ()
 {
-    //std::ifstream file;
-    //file.open("entradas/favoritos.csv");
-    //carregaArquivoFavoritos(file);
-    //file.close();
-    std::string n = {"4.17"};
-    std::cout << cpp_util::isNumber(n);
+    std::ifstream file;
+    PlataformaDigital teste("Teste");
+    Midia::Genero genero("IN", "Indie");
+
+    file.open("entradas/usuarios.csv");
+    teste.carregaArquivoUsuarios(file);
+    file.close();
+    teste.imprimeAssinantes();
+
+    file.open("entradas/generos.csv");
+    teste.carregaArquivoGeneros(file);
+    file.close();
+    
+    file.open("entradas/midias_corrigidas.csv");
+    teste.carregaArquivoMidias(file);
+    file.close();
+
+    //teste.imprimeMidiasPorGenero(&genero);
+
+/*
+    file.open("entradas/favoritos.csv");
+    teste.carregaArquivoFavoritos(file);
+    file.close();
+*/
     return 0;
 }

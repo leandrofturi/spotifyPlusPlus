@@ -3,19 +3,12 @@
 Musica::Musica() {}
 
 Musica::Musica(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero)
-    : Midia(nome, codigo, duracao, anoLancamento, 'M', genero) {}
+    : Midia(nome, codigo, duracao, anoLancamento, genero)
+{
+    this->tipo = "MUSICA";
+}
 
 Musica::~Musica() {}
-
-Album* Musica::getAlbum()
-{
-    return this->album;
-}
-
-void Musica::setAlbum(Album* album)
-{
-    this->album = album;
-}
 
 void Musica::imprimeInfoMidia()
 {
@@ -26,4 +19,9 @@ void Musica::imprimeInfoMidia()
     std::cout << "Genero: " << this->getGenero()->getNome() << std::endl;
     std::cout << "Duracao: " << this->getDuracao() << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
+}
+
+void Musica::imprimeNoArquivo(std::ofstream& file)
+{
+
 }

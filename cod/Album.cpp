@@ -18,13 +18,9 @@ Album::Album(std::string nome, int duracao, int anoLancamento)
 
 Album::~Album()
 {
-    std::list<Musica*>::iterator aux1;
-    for(aux1 = this->musicas->begin(); aux1 != this->musicas->end(); aux1 ++)
-    {
-        delete *aux1;
-    }
-
+    for(Musica* aux : *this->musicas) delete aux;
     delete this->musicas;
+
     this->qtdMusicas = 0;
 }
 
@@ -58,14 +54,14 @@ void Album::setAnoLancamento(int anoLancamento)
     this->anoLancamento = anoLancamento;
 }
 
+int Album::getQtdMusicas()
+{
+    return this->qtdMusicas;
+}
+
 std::list<Musica*>* Album::getMusicas()
 {
     return this->musicas;
-}
-
-void Album::setMusicas(std::list<Musica*>* musicas)
-{
-    this->musicas = musicas;
 }
 
 void Album::addMusica(Musica* musica)
@@ -78,12 +74,8 @@ void Album::rmMusica(Musica* musica)
     this->musicas->remove(musica);
 }
 
-Artista* Album::getArtista()
+bool Album::isMusica(Musica* musica)
 {
-    return this->artista;
-}
-
-void Album::setArtista(Artista* artista)
-{
-    this->artista = artista;
+    std::list<Musica*>::iterator it = find(this->musicas->begin(), this->musicas->end(), musica);
+    return it != this->musicas->end();
 }

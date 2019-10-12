@@ -27,13 +27,12 @@ Midia::Midia()
     this->qtdMidias ++;
 }
 
-Midia::Midia(std::string nome, int codigo, float duracao, int anoLancamento, char tipo, const Midia::Genero* genero)
+Midia::Midia(std::string nome, int codigo, double duracao, int anoLancamento, Midia::Genero* genero)
 {
     this->nome = nome;
     this->codigo = codigo;
     this->duracao = duracao;
     this->anoLancamento = anoLancamento;
-    this->tipo = tipo;
 
     this->genero = genero;
 
@@ -60,19 +59,19 @@ int Midia::getCodigo()
     return this->codigo;
 }
 
-void Midia::setCodigo(int codigo)
-{
-    this->codigo = codigo;
-}
-
-float Midia::getDuracao()
+double Midia::getDuracao()
 {
     return this->duracao;
 }
 
-void Midia::setDuracao(float duracao)
+void Midia::setDuracao(double duracao)
 {
     this->duracao = duracao;
+}
+
+std::string Midia::formataDuracao()
+{
+
 }
 
 int Midia::getAnoLancamento()
@@ -87,18 +86,18 @@ void Midia::setAnoLancamento(int anoLancamento)
 
 std::string Midia::getTipo()
 {
-    if(this->tipo == 'M')
+    if(this->tipo == "MUSICA")
     {
         return "Musica";
     }
-    else if(this->tipo == 'P')
+    else if(this->tipo == "PODCAST")
     {
         return "Podcast";
     }
     return "Indefinido";
 }
 
-const Midia::Genero* Midia::getGenero()
+Midia::Genero* Midia::getGenero()
 {
     return this->genero;
 }

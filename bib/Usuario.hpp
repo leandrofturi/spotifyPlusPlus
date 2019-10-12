@@ -1,6 +1,8 @@
 #ifndef _USUARIO_HPP_
 #define _USUARIO_HPP_
 
+// ATRIBUTOS OK
+
 #include <iostream>
 #include <fstream>
 
@@ -18,9 +20,8 @@ public:
     std::string getNome();
     void setNome(std::string nome);
     int getCodigo();
-	void setCodigo(int codigo);
 
-    void imprimeNoArquivo(std::ofstream& file);
+    virtual void imprimeNoArquivo(std::ofstream& file) = 0;
 };
 
 #endif

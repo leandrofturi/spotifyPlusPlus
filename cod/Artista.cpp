@@ -16,16 +16,6 @@ Artista::~Artista()
     delete this->albuns;
 }
 
-std::list<Album*>* Artista::getAlbuns()
-{
-    return this->albuns;
-}
-
-void Artista::setAlbuns(std::list<Album*>* albuns)
-{
-    this->albuns = albuns;
-}
-
 void Artista::addAlbum(Album* album)
 {
     this->albuns->push_back(album);
@@ -34,4 +24,15 @@ void Artista::addAlbum(Album* album)
 void Artista::rmAlbum(Album* album)
 {
     this->albuns->remove(album);
+}
+
+bool Artista::isAlbum(Album* album)
+{
+    std::list<Album*>::iterator it = find(this->albuns->begin(), this->albuns->end(), album);
+    return it != this->albuns->end();
+}
+
+void Artista::imprimeNoArquivo(std::ofstream& file)
+{
+
 }

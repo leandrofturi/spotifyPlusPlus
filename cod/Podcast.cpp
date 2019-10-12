@@ -3,8 +3,9 @@
 Podcast::Podcast() {}
 
 Podcast::Podcast(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero, int qtdTemporadas)
-    : Midia(nome, codigo, duracao, anoLancamento, 'P', genero)
+    : Midia(nome, codigo, duracao, anoLancamento, genero)
 {
+    this->tipo = "PODCAST";
     this->qtdTemporadas = qtdTemporadas;
 }
 
@@ -20,16 +21,6 @@ void Podcast::setQtdTemporadas(int qtdTemporadas)
     this->qtdTemporadas = qtdTemporadas;
 }
 
-Podcaster* Podcast::getPodcaster()
-{
-    return this->podcaster;
-}
-
-void Podcast::setPodcaster(Podcaster* podcaster)
-{
-    this->podcaster = podcaster;
-}
-
 void Podcast::imprimeInfoMidia()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;
@@ -40,4 +31,10 @@ void Podcast::imprimeInfoMidia()
     std::cout << "Duracao: " << this->getDuracao() << std::endl;
     std::cout << "Quantidade de temporadas: " << this->getQtdTemporadas() << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
+}
+
+
+void Podcast::imprimeNoArquivo(std::ofstream& file)
+{
+
 }

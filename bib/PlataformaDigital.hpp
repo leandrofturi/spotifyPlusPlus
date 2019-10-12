@@ -1,6 +1,8 @@
 #ifndef _PLATAFORMADIGITAL_HPP_
 #define _PLATAFORMADIGITAL_HPP_
 
+// ATRIBUTOS OK
+
 #include <iostream>
 #include <fstream>
 #include <algorithm>
@@ -32,27 +34,25 @@ public:
     std::string getNome();
     void setNome(std::string nome);
 
-    std::list<Assinante*>* getAssinantes();
     void addAssinante(Assinante* assinante);
     void rmAssinante(Assinante* assinante);
+    Assinante* buscaAssinante(int codigo);
     bool isAssinante(Assinante* assinante);
     void imprimeAssinantes();
     
-    std::list<Produtor*>* getProdutores();
     void addProdutor(Produtor* produtor);
     void rmProdutor(Produtor* produtor);
     bool isProdutor(Produtor* produtor);
     //void imprimeProdutores();
 
-    std::list<Midia*>* getMidias();
     void addMidia(Midia* midia);
     void rmMidia(Midia* midia);
     bool isMidia(Midia* midia);
     //void imprimeMidias();
 
-    std::list<Midia::Genero*>* getGeneros();
     void addGenero(Midia::Genero* genero);
     void rmGenero(Midia::Genero* genero);
+    Midia::Genero* buscaGenero(std::string sigla);
     bool isGenero(Midia::Genero* genero);
     void imprimeMidiasPorGenero(Midia::Genero* genero);
 
