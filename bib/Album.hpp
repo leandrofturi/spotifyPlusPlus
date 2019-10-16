@@ -12,6 +12,7 @@ class Album
 {
 private:
     std::string nome;
+    int codigo;
     int duracao;
     int anoLancamento;
     int qtdMusicas;
@@ -20,11 +21,12 @@ private:
 
 public:
     Album();
-    Album(std::string nome, int duracao, int anoLancamento);
+    Album(std::string nome, int codigo, int duracao, int anoLancamento);
     ~Album();
 
     std::string getNome();
     void setNome(std::string nome);
+    int getCodigo();
     int getDuracao();
     void setDuracao(int duracao);
     int getAnoLancamento();

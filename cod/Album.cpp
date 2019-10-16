@@ -6,9 +6,10 @@ Album::Album()
     this->qtdMusicas = 0;
 }
 
-Album::Album(std::string nome, int duracao, int anoLancamento)
+Album::Album(std::string nome, int codigo, int duracao, int anoLancamento)
 {
     this->nome = nome;
+    this->codigo = codigo;
     this->duracao = duracao;
     this->anoLancamento = anoLancamento;
     this->qtdMusicas = 0;
@@ -32,6 +33,11 @@ std::string Album::getNome()
 void Album::setNome(std::string nome)
 {
     this->nome = nome;
+}
+
+int Album::getCodigo()
+{
+    return this->codigo;
 }
 
 int Album::getDuracao()

@@ -53,6 +53,7 @@ Assinante* PlataformaDigital::buscaAssinante(int codigo)
 {
     for(Assinante* aux : *this->assinantes)
         if(aux->getCodigo() == codigo) return aux;
+    return *this->assinantes->end();
 }
 
 bool PlataformaDigital::isAssinante(Assinante* assinante)
@@ -85,6 +86,13 @@ void PlataformaDigital::rmProdutor(Produtor* produtor)
     this->produtores->remove(produtor);
 }
 
+Produtor* PlataformaDigital::buscaProdutor(int codigo)
+{
+    for(Produtor* aux :*this->produtores)
+        if(aux->getCodigo() == codigo) return aux;
+    return *this->produtores->end();
+}
+
 bool PlataformaDigital::isProdutor(Produtor* produtor)
 {
     std::list<Produtor*>::iterator it = find(this->produtores->begin(), this->produtores->end(), produtor);
@@ -93,7 +101,7 @@ bool PlataformaDigital::isProdutor(Produtor* produtor)
 
 void PlataformaDigital::addMidia(Midia* midia)
 {
-    this->addMidia(midia);
+    this->midias->push_back(midia);
 }
 
 void PlataformaDigital::rmMidia(Midia* midia)
@@ -121,12 +129,30 @@ Midia::Genero* PlataformaDigital::buscaGenero(std::string sigla)
 {
     for(Midia::Genero* aux :*this->generos)
         if(aux->getSigla() == sigla) return aux;
+    return *this->generos->end();
 }
 
 bool PlataformaDigital::isGenero(Midia::Genero* genero)
 {
     std::list<Midia::Genero*>::iterator it = find(this->generos->begin(), this->generos->end(), genero);
     return it != this->generos->end();
+}
+
+void PlataformaDigital::addAlbum(Album* album)
+{
+    this->albuns->push_back(album);
+}
+
+void PlataformaDigital::rmAlbum(Album* album)
+{
+    this->albuns->remove(album);
+}
+
+Album* PlataformaDigital::buscaAlbum(int codigo)
+{
+    for(Album* aux :*this->albuns)
+        if(aux->getCodigo() == codigo) return aux;
+    return *this->albuns->end();
 }
 
 void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
@@ -231,7 +257,7 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
             }
             
             Midia::Genero* genero;
-            genero = new Midia::Genero(cel[0], cel[1]);
+            genero = new Midia::Genero(cel[1], cel[0]);
             this->addGenero(genero);
         }
     }
@@ -248,8 +274,11 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
     std::string linha;
     std::vector<std::string> cel;
     cpp_util::Tokenizer tokComma("", ',');
-    Midia::Genero* gen;
+    cpp_util::Tokenizer tokComma2("", ',');
     Midia* mid;
+    Midia::Genero* gen;
+    Produtor* prod;
+    Album* alb;
 
     getline(file, linha);
 	cpp_util::Tokenizer tok(linha, ';');
@@ -285,36 +314,48 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
                 return;
             }
             tokComma.overwriteStream(cel[5]);
-            for(std::string sigla : tokComma.remaining())
+            gen = this->buscaGenero(cpp_util::trim(tokComma.remaining()[0]));
+            if(gen == *this->generos->end())
             {
-                gen = this->buscaGenero(sigla);
-                if(gen == *this->generos->end())
-                {
-                    std::cout << "ERRO! Genero nao encontrado!" << std::endl;
-                    return;
-                }
-                if(cel[2] == "M")
-                {
-                    mid = new Musica(cel[1], stoi(cel[0]), 0.0, stoi(cel[8]), gen);
-                }
-                else if(cel[2] == "P")
-                {
-                    if(!cpp_util::isNumber(cel[6]))
-                    {
-                        std::cout << "ERRO! Formato invalido!" << std::endl;
-                        return;
-                    }
-                    mid = new Podcast(cel[1], stoi(cel[0]), 0.0, stoi(cel[8]), gen, stoi(cel[6]));
-                }
-                else
-                {
-                    std::cout << "ERRO! Tipo invalido!" << std::endl;
-                    return;
-                }
-                // produtor
-                // insere o album
-                this->addMidia(mid);
+                std::cout << "ERRO! Genero nao encontrado!" << std::endl;
+                return;
             }
+            if(cel[2] == "M")
+            {
+                mid = new Musica(cel[1], stoi(cel[0]), 0.0, stoi(cel[8]), gen);
+            }
+            else if(cel[2] == "P")
+            {
+                if(!cpp_util::isNumber(cel[6]))
+                {
+                    std::cout << "ERRO! Formato invalido!" << std::endl;
+                    return;
+                }
+                mid = new Podcast(cel[1], stoi(cel[0]), 0.0, stoi(cel[8]), gen, stoi(cel[6]));
+            }
+            else
+            {
+                std::cout << "ERRO! Tipo invalido!" << std::endl;
+                return;
+            }
+            tokComma2.overwriteStream(cel[3]);
+            for(std::string codigo : tokComma2.remaining())
+            {
+                if(!cpp_util::isNumber(codigo))
+                {
+                    std::cout << "ERRO! Formato invalido!" << std::endl;
+                    return;
+                }
+                prod = this->buscaProdutor(stoi(codigo));
+                if(prod == *this->produtores->end())
+                {
+                    std::cout << "ERRO! Produtor nao encontrado!" << std::endl;
+                    return;
+                }
+                prod->addMidia(mid);
+            }
+            //alb = this->buscaAlbum()
+            this->addMidia(mid);
         }
     }
 }

@@ -13,6 +13,7 @@
 #include "Artista.hpp"
 #include "Midia.hpp"
 #include "Assinante.hpp"
+#include "Album.hpp"
 #include "../cpp-utils/util/StringUtils.h"
 #include "../cpp-utils/util/Tokenizer.h"
 
@@ -25,6 +26,7 @@ private:
     std::list<Produtor*>* produtores;
     std::list<Midia*>* midias;
     std::list<Midia::Genero*>* generos;
+    std::list<Album*>* albuns;
 
 public:
     PlataformaDigital();
@@ -42,6 +44,7 @@ public:
     
     void addProdutor(Produtor* produtor);
     void rmProdutor(Produtor* produtor);
+    Produtor* buscaProdutor(int codigo);
     bool isProdutor(Produtor* produtor);
     //void imprimeProdutores();
 
@@ -55,6 +58,12 @@ public:
     Midia::Genero* buscaGenero(std::string sigla);
     bool isGenero(Midia::Genero* genero);
     void imprimeMidiasPorGenero(Midia::Genero* genero);
+
+    void addAlbum(Album* album);
+    void rmAlbum(Album* album);
+    Album* buscaAlbum(int codigo);
+    bool isAlbum(Album* album);
+    void imprimeMidiasPorGenero(Album* album);
 
     void carregaArquivoUsuarios(std::ifstream& file);
     void carregaArquivoGeneros(std::ifstream& file);

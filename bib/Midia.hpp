@@ -4,6 +4,7 @@
 // ATRIBUTOS OK!
 
 #include <iostream>
+#include <ctime>
 
 class Midia
 {

@@ -21,6 +21,7 @@ public:
 
     void addAlbum(Album* album);
     void rmAlbum(Album* album);
+    Album* buscaAlbum(int codigo);
     bool isAlbum(Album* album);
 
     void imprimeNoArquivo(std::ofstream& file);
