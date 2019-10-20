@@ -43,7 +43,7 @@ void Assinante::imprimeFavoritas()
         std::cout << aux->getTipo() << std::endl;
         std::cout << "Nome: " << aux->getNome() << std::endl;
         std::cout << "Genero: " << aux->getGenero()->getNome() << std::endl;
-        std::cout << "Duracao: " << aux->getDuracao() << std::endl;
+        std::cout << "Duracao: " << aux->formataDuracao() << std::endl;
         std::cout << std::endl;
     }
     std::cout << "################################" << std::endl << std::endl;

@@ -17,32 +17,33 @@
 #include "cpp-utils/util/Tokenizer.h"
 
 
-
 int main ()
 {
     std::ifstream file;
     PlataformaDigital teste("Teste");
-    Midia::Genero genero("IN", "Indie");
+    Midia::Genero genero("Indie", "IN");
 
     file.open("entradas/usuarios.csv");
     teste.carregaArquivoUsuarios(file);
     file.close();
-    teste.imprimeAssinantes();
+    //teste.imprimeAssinantes();
 
     file.open("entradas/generos.csv");
     teste.carregaArquivoGeneros(file);
     file.close();
-    
+
     file.open("entradas/midias_corrigidas.csv");
     teste.carregaArquivoMidias(file);
     file.close();
-
     //teste.imprimeMidiasPorGenero(&genero);
 
-/*
     file.open("entradas/favoritos.csv");
     teste.carregaArquivoFavoritos(file);
     file.close();
-*/
+
+    teste.imprimeAssinantes();
+    teste.imprimeProdutores();
+    teste.imprimeMidias();
+
     return 0;
 }
