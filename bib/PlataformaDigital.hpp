@@ -44,8 +44,8 @@ public:
     Produtor* buscaProdutor(int codigo);
     void imprimeProdutores();
 
-    void addMidia(Midia* midia);
-    void rmMidia(Midia* midia);
+    void addMidia(Midia* midia, std::list<Produtor*>* produtores);
+    void rmMidia(Midia* midia); // retirar dos produtores
     Midia* buscaMidia(int codigo);
     void imprimeMidias();
 
@@ -62,6 +62,8 @@ public:
     void carregaArquivoGeneros(std::ifstream& file);
     void carregaArquivoMidias(std::ifstream& file);
     void carregaArquivoFavoritos(std::ifstream& file);
+
+
 };
 
 #endif

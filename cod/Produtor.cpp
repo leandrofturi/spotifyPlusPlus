@@ -26,6 +26,13 @@ void Produtor::rmMidia(Midia* midia)
     this->midias->remove(midia);
 }
 
+Midia* Produtor::buscaMidia(int codigo)
+{
+    for(Midia* aux :*this->midias)
+        if(aux->getCodigo() == codigo) return aux;
+    return *this->midias->end();
+}
+
 void Produtor::imprimeMidias()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;

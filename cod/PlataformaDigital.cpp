@@ -106,14 +106,23 @@ void PlataformaDigital::imprimeProdutores()
     std::cout << "################################" << std::endl << std::endl;
 }
 
-void PlataformaDigital::addMidia(Midia* midia)
+void PlataformaDigital::addMidia(Midia* midia, std::list<Produtor*>* produtores)
 {
+    for(Produtor* aux : *produtores) aux->addMidia(midia);
     if(this->buscaMidia(midia->getCodigo()) == *this->midias->end())
+    {
         this->midias->push_back(midia);
+    }
 }
 
 void PlataformaDigital::rmMidia(Midia* midia)
 {
+    Midia* midAux;
+    for(Produtor* aux : *this->produtores)
+    {
+        midAux = aux->buscaMidia(midia->getCodigo());
+        //if(midAux == *aux->mi)
+    }
     this->midias->remove(midia);
 }
 
@@ -311,6 +320,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
     std::string nome;
     std::string tipo;
     std::vector<std::string> vetProdutores;
+    std::list<Produtor*>* produtores = new std::list<Produtor*>;
     std::vector<std::string> vetDuracao;
     double duracao;
     std::vector<std::string> vetGeneros;
@@ -341,6 +351,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
             tipo = cpp_util::trim(cel[2]);
             tokComma.overwriteStream(cpp_util::trim(cel[3]));
             vetProdutores = tokComma.remaining();
+            produtores->clear();
             tokComma.overwriteStream(cpp_util::trim(cel[4]));
             vetDuracao = tokComma.remaining();
             tokComma.overwriteStream(cpp_util::trim(cel[5]));
@@ -399,7 +410,6 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
                 }
                 midia = new Podcast(nome, std::stoi(codigo), duracao, std::stoi(anoLancamento), gen, std::stoi(temporada));
             }
-            this->addMidia(midia);
             for(std::string aux : vetProdutores)
             {
                 if(!vetProdutores.empty())
@@ -415,11 +425,13 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
                         std::cout << "ERRO! Produtor nao encontrado!" << std::endl;
                         return;
                     }
-                    prod->addMidia(midia);
+                    produtores->push_back(prod);
                 }
             }
+            this->addMidia(midia, produtores);
         }
     }
+    delete produtores;
 }
 
 void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)

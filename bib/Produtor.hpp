@@ -20,6 +20,7 @@ public:
 
     void addMidia(Midia* midia);
     void rmMidia(Midia* midia);
+    Midia* buscaMidia(int codigo);
     void imprimeMidias();
 
     void imprimeNoArquivo(std::ofstream& file);
