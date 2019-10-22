@@ -20,8 +20,3 @@ void Musica::imprimeInfoMidia()
     std::cout << "Duracao: " << this->getDuracao() << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
 }
-
-void Musica::imprimeNoArquivo(std::ofstream& file)
-{
-
-}

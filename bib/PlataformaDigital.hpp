@@ -45,7 +45,7 @@ public:
     void imprimeProdutores();
 
     void addMidia(Midia* midia, std::list<Produtor*>* produtores);
-    void rmMidia(Midia* midia); // retirar dos produtores
+    void rmMidia(Midia* midia);
     Midia* buscaMidia(int codigo);
     void imprimeMidias();
 

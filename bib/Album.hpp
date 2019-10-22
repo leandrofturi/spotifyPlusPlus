@@ -33,7 +33,7 @@ public:
 
     void addMusica(Musica* musica);
     void rmMusica(Musica* musica);
-    Musica* buscaMusicas(int codigo);
+    Musica* buscaMusica(int codigo);
     void imprimeMusicas();
 };
 

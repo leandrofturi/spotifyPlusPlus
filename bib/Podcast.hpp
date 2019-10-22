@@ -1,8 +1,6 @@
 #ifndef _PODCAST_HPP_
 #define _PODCAST_HPP_
 
-// ATRIBUTOS OK
-
 #include <iostream>
 #include "Midia.hpp"
 
@@ -19,7 +17,7 @@ public:
     int getQtdTemporadas();
     void setQtdTemporadas(int qtdTemporadas);
 
-    void imprimeNoArquivo(std::ofstream& file);
+    //void imprimeNoArquivo(std::ofstream& file);
     void imprimeInfoMidia();
 };
 

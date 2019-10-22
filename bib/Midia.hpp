@@ -1,8 +1,6 @@
 #ifndef _MIDIA_HPP_
 #define _MIDIA_HPP_
 
-// ATRIBUTOS OK!
-
 #include <iostream>
 #include <ctime>
 
@@ -53,8 +51,8 @@ public:
     Midia::Genero* getGenero();
 
     void imprimeQtdMidias();
-    virtual void imprimeInfoMidia() = 0;
-    virtual void imprimeNoArquivo(std::ofstream& file) = 0;
+    //virtual void imprimeInfoMidia() = 0;
+    //virtual void imprimeNoArquivo(std::ofstream& file) = 0;
 };
 
 #endif

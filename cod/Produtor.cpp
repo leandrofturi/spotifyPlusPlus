@@ -18,7 +18,8 @@ Produtor::~Produtor()
 
 void Produtor::addMidia(Midia* midia)
 {
-    this->midias->push_back(midia);
+    if(this->buscaMidia(midia->getCodigo()) == NULL)
+        this->midias->push_back(midia);
 }
 
 void Produtor::rmMidia(Midia* midia)
@@ -30,7 +31,7 @@ Midia* Produtor::buscaMidia(int codigo)
 {
     for(Midia* aux :*this->midias)
         if(aux->getCodigo() == codigo) return aux;
-    return *this->midias->end();
+    return NULL;
 }
 
 void Produtor::imprimeMidias()
@@ -48,9 +49,4 @@ void Produtor::imprimeMidias()
         std::cout << std::endl;
     }
     std::cout << "################################" << std::endl << std::endl;
-}
-
-void Produtor::imprimeNoArquivo(std::ofstream& file)
-{
-
 }

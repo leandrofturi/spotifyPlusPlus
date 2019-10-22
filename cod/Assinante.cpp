@@ -18,18 +18,20 @@ Assinante::~Assinante()
 
 void Assinante::addFavorita(Midia* favorita)
 {
-    this->favoritas->push_back(favorita);
+    if(this->buscaFavorita(favorita->getCodigo()) == NULL)
+        this->favoritas->push_back(favorita);
+}
+
+Midia* Assinante::buscaFavorita(int codigo)
+{
+    for(Midia* aux :*this->favoritas)
+        if(aux->getCodigo() == codigo) return aux;
+    return NULL;
 }
 
 void Assinante::rmFavorita(Midia* favorita)
 {
     this->favoritas->remove(favorita);
-}
-
-bool Assinante::isFavorita(Midia* favorita)
-{
-    std::list<Midia*>::iterator it = find(this->favoritas->begin(), this->favoritas->end(), favorita);
-    return it != this->favoritas->end();
 }
 
 void Assinante::imprimeFavoritas()
@@ -47,9 +49,4 @@ void Assinante::imprimeFavoritas()
         std::cout << std::endl;
     }
     std::cout << "################################" << std::endl << std::endl;
-}
-
-void Assinante::imprimeNoArquivo(std::ofstream& file)
-{
-    
 }

@@ -32,9 +32,3 @@ void Podcast::imprimeInfoMidia()
     std::cout << "Quantidade de temporadas: " << this->getQtdTemporadas() << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
 }
-
-
-void Podcast::imprimeNoArquivo(std::ofstream& file)
-{
-
-}

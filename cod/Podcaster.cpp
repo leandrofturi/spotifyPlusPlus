@@ -18,7 +18,8 @@ Podcaster::~Podcaster()
 
 void Podcaster::addPodcast(Podcast* podcast)
 {
-    this->podcasts->push_back(podcast);
+    if(buscaPodcast(podcast->getCodigo()) == NULL)
+        this->podcasts->push_back(podcast);
 }
 
 void Podcaster::rmPodcast(Podcast* podcast)
@@ -26,13 +27,26 @@ void Podcaster::rmPodcast(Podcast* podcast)
     this->podcasts->remove(podcast);
 }
 
-bool Podcaster::isPodcast(Podcast* podcast)
+Podcast* Podcaster::buscaPodcast(int codigo)
 {
-    std::list<Podcast*>::iterator it = find(this->podcasts->begin(), this->podcasts->end(), podcast);
-    return it != this->podcasts->end();
+    for(Podcast* aux :*this->podcasts)
+        if(aux->getCodigo() == codigo) return aux;
+    return NULL;
 }
 
-void Podcaster::imprimeNoArquivo(std::ofstream& file)
+void Podcaster::imprimePodcast()
 {
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Podcasts de " << this->getNome() << ":" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
 
+    for(Podcast* aux : *this->podcasts)
+    {
+        std::cout << "Nome: " << aux->getNome() << std::endl;
+        std::cout << "Genero: " << aux->getGenero()->getNome() << std::endl;
+        std::cout << "Duracao: " << aux->formataDuracao() << std::endl;
+        std::cout << "Quantidade de temporadas: " << aux->getQtdTemporadas() << std::endl;
+        std::cout << std::endl;
+    }
+    std::cout << "################################" << std::endl << std::endl;
 }

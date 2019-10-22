@@ -67,7 +67,8 @@ int Album::getQtdMusicas()
 
 void Album::addMusica(Musica* musica)
 {
-    this->musicas->push_back(musica);
+    if(this->buscaMusica(musica->getCodigo()) == NULL)
+        this->musicas->push_back(musica);
 }
 
 void Album::rmMusica(Musica* musica)
@@ -75,11 +76,11 @@ void Album::rmMusica(Musica* musica)
     this->musicas->remove(musica);
 }
 
-Musica* Album::buscaMusicas(int codigo)
+Musica* Album::buscaMusica(int codigo)
 {
     for(Musica* aux :*this->musicas)
         if(aux->getCodigo() == codigo) return aux;
-    return *this->musicas->end();
+    return NULL;
 }
 
 void Album::imprimeMusicas()

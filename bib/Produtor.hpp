@@ -1,8 +1,6 @@
 #ifndef _PRODUTOR_HPP_
 #define _PRODUTOR_HPP_
 
-//ATRIBUTOS OK
-
 #include <iostream>
 #include <list>
 #include "Usuario.hpp"
@@ -23,7 +21,7 @@ public:
     Midia* buscaMidia(int codigo);
     void imprimeMidias();
 
-    void imprimeNoArquivo(std::ofstream& file);
+    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

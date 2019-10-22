@@ -1,8 +1,6 @@
 #ifndef _PODCASTER_HPP_
 #define _PODCASTER_HPP_
 
-// ATRIBUTOS OK
-
 #include <iostream>
 #include <list>
 #include <algorithm>
@@ -21,9 +19,10 @@ public:
 
     void addPodcast(Podcast* podcast);
     void rmPodcast(Podcast* podcast);
-    bool isPodcast(Podcast* podcast);
+    Podcast* buscaPodcast(int codigo);
+    void imprimePodcast();
 
-    void imprimeNoArquivo(std::ofstream& file);
+    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

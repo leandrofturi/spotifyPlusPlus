@@ -1,8 +1,6 @@
 #ifndef _ASSINANTE_HPP_
 #define _ASSINANTE_HPP_
 
-//ATRIBUTOS OK
-
 #include <iostream>
 #include <list>
 #include <algorithm>
@@ -21,10 +19,10 @@ public:
 
     void addFavorita(Midia* favorita);
     void rmFavorita(Midia* favorita);
-    bool isFavorita(Midia* favorita);
+    Midia* buscaFavorita(int codigo);
     void imprimeFavoritas();
 
-    void imprimeNoArquivo(std::ofstream& file);
+    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

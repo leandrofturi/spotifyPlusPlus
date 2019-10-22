@@ -44,7 +44,7 @@ void PlataformaDigital::setNome(std::string nome)
 
 void PlataformaDigital::addAssinante(Assinante* assinante)
 {
-    if(this->buscaAssinante(assinante->getCodigo()) == *this->assinantes->end())
+    if(this->buscaAssinante(assinante->getCodigo()) == NULL)
         this->assinantes->push_back(assinante);
 }
 
@@ -57,7 +57,7 @@ Assinante* PlataformaDigital::buscaAssinante(int codigo)
 {
     for(Assinante* aux : *this->assinantes)
         if(aux->getCodigo() == codigo) return aux;
-    return *this->assinantes->end();
+    return NULL;
 }
 
 void PlataformaDigital::imprimeAssinantes()
@@ -76,7 +76,7 @@ void PlataformaDigital::imprimeAssinantes()
 
 void PlataformaDigital::addProdutor(Produtor* produtor)
 {
-    if(this->buscaProdutor(produtor->getCodigo()) == *this->produtores->end())
+    if(this->buscaProdutor(produtor->getCodigo()) == NULL)
         this->produtores->push_back(produtor);
 }
 
@@ -89,7 +89,7 @@ Produtor* PlataformaDigital::buscaProdutor(int codigo)
 {
     for(Produtor* aux :*this->produtores)
         if(aux->getCodigo() == codigo) return aux;
-    return *this->produtores->end();
+    return NULL;
 }
 
 void PlataformaDigital::imprimeProdutores()
@@ -109,7 +109,7 @@ void PlataformaDigital::imprimeProdutores()
 void PlataformaDigital::addMidia(Midia* midia, std::list<Produtor*>* produtores)
 {
     for(Produtor* aux : *produtores) aux->addMidia(midia);
-    if(this->buscaMidia(midia->getCodigo()) == *this->midias->end())
+    if(this->buscaMidia(midia->getCodigo()) == NULL)
     {
         this->midias->push_back(midia);
     }
@@ -121,7 +121,7 @@ void PlataformaDigital::rmMidia(Midia* midia)
     for(Produtor* aux : *this->produtores)
     {
         midAux = aux->buscaMidia(midia->getCodigo());
-        //if(midAux == *aux->mi)
+        if(midAux != NULL) aux->rmMidia(midAux);
     }
     this->midias->remove(midia);
 }
@@ -130,7 +130,7 @@ Midia* PlataformaDigital::buscaMidia(int codigo)
 {
     for(Midia* aux :*this->midias)
         if(aux->getCodigo() == codigo) return aux;
-    return *this->midias->end();
+    return NULL;
 }
 
 void PlataformaDigital::imprimeMidias()
@@ -152,7 +152,7 @@ void PlataformaDigital::imprimeMidias()
 
 void PlataformaDigital::addGenero(Midia::Genero* genero)
 {
-    if(this->buscaGenero(genero->getSigla()) == *this->generos->end())
+    if(this->buscaGenero(genero->getSigla()) == NULL)
         this->generos->push_back(genero);
 }
 
@@ -165,7 +165,7 @@ Midia::Genero* PlataformaDigital::buscaGenero(std::string sigla)
 {
     for(Midia::Genero* aux :*this->generos)
         if(aux->getSigla() == sigla) return aux;
-    return *this->generos->end();
+    return NULL;
 }
 
 void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
@@ -190,7 +190,7 @@ void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
 
 void PlataformaDigital::addAlbum(Album* album)
 {
-    if(this->buscaAlbum(album->getCodigo()) == *this->albuns->end())
+    if(this->buscaAlbum(album->getCodigo()) == NULL)
         this->albuns->push_back(album);
 }
 
@@ -203,7 +203,7 @@ Album* PlataformaDigital::buscaAlbum(int codigo)
 {
     for(Album* aux :*this->albuns)
         if(aux->getCodigo() == codigo) return aux;
-    return *this->albuns->end();
+    return NULL;
 }
 
 void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
@@ -376,7 +376,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
             
             Midia::Genero* gen = this->buscaGenero(cpp_util::trim(vetGeneros[0]));
             Midia* midia;
-            if(gen == *this->generos->end())
+            if(gen == NULL)
             {
                 std::cout << "ERRO! Genero nao encontrado!" << std::endl;
                 return;
@@ -393,7 +393,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
                         return;
                     }
                     Album* alb = this->buscaAlbum(stoi(codAlbum));
-                    if(alb == *this->albuns->end())
+                    if(alb == NULL)
                     {
                         Album* novoAlb = new Album(album, stoi(codAlbum), duracao, stoi(anoLancamento));
                         novoAlb->addMusica((Musica*) midia);
@@ -420,7 +420,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
                         return;
                     }
                     Produtor* prod = this->buscaProdutor(stoi(cpp_util::trim(aux)));
-                    if(prod == *this->produtores->end())
+                    if(prod == NULL)
                     {
                         std::cout << "ERRO! Produtor nao encontrado!" << std::endl;
                         return;
@@ -475,7 +475,7 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
                 return;
             }
             Assinante* ass = this->buscaAssinante(stoi(codigo));
-            if(ass == *this->assinantes->end())
+            if(ass == NULL)
             {
                 std::cout << "ERRO! Assinante nao encontrado!" << std::endl;
                 return;
@@ -492,7 +492,7 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
                             return;
                         }
                         Midia* midia = this->buscaMidia(stoi(cpp_util::trim(aux)));
-                        if(midia == *this->midias->end())
+                        if(midia == NULL)
                         {
                             std::cout << "ERRO! Midia nao encontrada!" << std::endl;
                             return;

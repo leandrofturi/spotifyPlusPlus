@@ -1,8 +1,6 @@
 #ifndef _MUSICA_HPP_
 #define _MUSICA_HPP_
 
-// ATRIBUTOS OK
-
 #include <iostream>
 #include "Midia.hpp"
 
@@ -14,7 +12,7 @@ public:
     ~Musica();
 
     void imprimeInfoMidia();
-    void imprimeNoArquivo(std::ofstream& file);
+    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif
