@@ -17,8 +17,8 @@ public:
     int getQtdTemporadas();
     void setQtdTemporadas(int qtdTemporadas);
 
-    //void imprimeNoArquivo(std::ofstream& file);
     void imprimeInfoMidia();
+    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

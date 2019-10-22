@@ -62,6 +62,10 @@ public:
     void carregaArquivoGeneros(std::ifstream& file);
     void carregaArquivoMidias(std::ifstream& file);
     void carregaArquivoFavoritos(std::ifstream& file);
+
+    //void imprimeNoArquivo(std::ofstream& file);
+    //void exportarBiblioteca();
+    //void gerarRelatorios();
 };
 
 #endif

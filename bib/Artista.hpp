@@ -20,6 +20,7 @@ public:
     void addAlbum(Album* album);
     void rmAlbum(Album* album);
     Album* buscaAlbum(int codigo);
+    void imprimeMusicas();
 
     //void imprimeNoArquivo(std::ofstream& file);
 };

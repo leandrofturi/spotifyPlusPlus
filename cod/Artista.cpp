@@ -33,3 +33,8 @@ Album* Artista::buscaAlbum(int codigo)
         if(aux->getCodigo() == codigo) return aux;
     return NULL;
 }
+
+void Artista::imprimeMusicas()
+{
+    for(Album* aux : *this->albuns) aux->imprimeMusicas();
+}
