@@ -25,14 +25,3 @@ void Artista::rmAlbum(Album* album)
 {
     this->albuns->remove(album);
 }
-
-bool Artista::isAlbum(Album* album)
-{
-    std::list<Album*>::iterator it = find(this->albuns->begin(), this->albuns->end(), album);
-    return it != this->albuns->end();
-}
-
-void Artista::imprimeNoArquivo(std::ofstream& file)
-{
-
-}

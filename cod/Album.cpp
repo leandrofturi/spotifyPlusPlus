@@ -65,11 +65,6 @@ int Album::getQtdMusicas()
     return this->qtdMusicas;
 }
 
-std::list<Musica*>* Album::getMusicas()
-{
-    return this->musicas;
-}
-
 void Album::addMusica(Musica* musica)
 {
     this->musicas->push_back(musica);
@@ -80,8 +75,25 @@ void Album::rmMusica(Musica* musica)
     this->musicas->remove(musica);
 }
 
-bool Album::isMusica(Musica* musica)
+Musica* Album::buscaMusicas(int codigo)
 {
-    std::list<Musica*>::iterator it = find(this->musicas->begin(), this->musicas->end(), musica);
-    return it != this->musicas->end();
+    for(Musica* aux :*this->musicas)
+        if(aux->getCodigo() == codigo) return aux;
+    return *this->musicas->end();
+}
+
+void Album::imprimeMusicas()
+{
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+    std::cout << "Musicas de " << this->getNome() << ":" << std::endl;
+    std::cout << std::endl << "################################" << std::endl << std::endl;
+
+    for(Midia* aux : *this->musicas)
+    {
+        std::cout << "Nome: " << aux->getNome() << std::endl;
+        std::cout << "Genero: " << aux->getGenero()->getNome() << std::endl;
+        std::cout << "Duracao: " << aux->formataDuracao() << std::endl;
+        std::cout << std::endl;
+    }
+    std::cout << "################################" << std::endl << std::endl;
 }

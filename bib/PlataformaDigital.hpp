@@ -62,8 +62,6 @@ public:
     void carregaArquivoGeneros(std::ifstream& file);
     void carregaArquivoMidias(std::ifstream& file);
     void carregaArquivoFavoritos(std::ifstream& file);
-
-
 };
 
 #endif

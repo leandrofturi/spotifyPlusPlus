@@ -1,8 +1,6 @@
 #ifndef _ALBUM_HPP_
 #define _ALBUM_HPP_
 
-// ATRIBUTOS OK
-
 #include <iostream>
 #include <list>
 #include <algorithm>
@@ -33,10 +31,10 @@ public:
     void setAnoLancamento(int anoLancamento);
     int getQtdMusicas();
 
-    std::list<Musica*>* getMusicas();
     void addMusica(Musica* musica);
     void rmMusica(Musica* musica);
-    bool isMusica(Musica* musica);
+    Musica* buscaMusicas(int codigo);
+    void imprimeMusicas();
 };
 
 #endif

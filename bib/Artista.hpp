@@ -1,8 +1,6 @@
 #ifndef _ARTISTA_HPP_
 #define _ARTISTA_HPP_
 
-// ATRIBUTOS OK
-
 #include <iostream>
 #include <list>
 #include <algorithm>
@@ -22,9 +20,8 @@ public:
     void addAlbum(Album* album);
     void rmAlbum(Album* album);
     Album* buscaAlbum(int codigo);
-    bool isAlbum(Album* album);
 
-    void imprimeNoArquivo(std::ofstream& file);
+    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif
