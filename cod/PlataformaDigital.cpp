@@ -45,7 +45,10 @@ void PlataformaDigital::setNome(std::string nome)
 void PlataformaDigital::addAssinante(Assinante* assinante)
 {
     if(this->buscaAssinante(assinante->getCodigo()) == NULL)
+    {
         this->assinantes->push_back(assinante);
+        this->assinantes->sort(compareNomes);
+    }
 }
 
 void PlataformaDigital::rmAssinante(Assinante* assinante)
@@ -505,4 +508,42 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
     }
 }
 
-//file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+void PlataformaDigital::escreveEstatisticas()
+{
+    std::ofstream file;
+    file.open("estatisticas.txt", std::ios::out);
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    file << "Horas Consumidas: ";
+    //HC
+    file << "minutos" << std::endl;
+
+    file << "Genero mais ouvido: ";
+    // G
+    file << "-";
+    // MIn
+    file << "minutos";
+
+    file << "Mídias por Gênero:" << std::endl;
+    //G
+    file << ":";
+    //QG
+
+    file << "Top 10 Midias:" << std::endl;
+    //M
+    file << ":";
+    //G
+    file << ":";
+    //NF
+
+    file << "Top 10 Produtores:" << std::endl;
+    //P
+    file << ":";
+    //NF
+
+    file.close();
+}

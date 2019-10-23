@@ -6,6 +6,7 @@
 #include <cmath>
 #include <list>
 #include <vector>
+#include "global.hpp"
 #include "Produtor.hpp"
 #include "Podcaster.hpp"
 #include "Artista.hpp"
@@ -66,6 +67,9 @@ public:
     //void imprimeNoArquivo(std::ofstream& file);
     //void exportarBiblioteca();
     //void gerarRelatorios();
+    void escreveEstatisticas();
+    void escreveMidiasPorProdutores();
+    void escreveBackup();
 };
 
 #endif

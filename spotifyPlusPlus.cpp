@@ -41,9 +41,13 @@ int main ()
     teste.carregaArquivoFavoritos(file);
     file.close();
 
+    
+    teste.escreveEstatisticas();
+
+
     teste.imprimeAssinantes();
-    teste.imprimeProdutores();
-    teste.imprimeMidias();
+    //teste.imprimeProdutores();
+    //teste.imprimeMidias();
 
     return 0;
 }
