@@ -71,15 +71,7 @@ void Midia::setDuracao(double duracao)
 
 std::string Midia::formataDuracao()
 {
-    std::string duracao;
-    time_t seconds(60*this->duracao);
-    tm t = *gmtime(&seconds);
-    duracao.append(std::to_string(t.tm_hour));
-    duracao.append(":");
-    duracao.append(std::to_string(t.tm_min));
-    duracao.append(":");
-    duracao.append(std::to_string(t.tm_sec));
-    return duracao;
+    return formataHoras(60*this->duracao);
 }
 
 int Midia::getAnoLancamento()

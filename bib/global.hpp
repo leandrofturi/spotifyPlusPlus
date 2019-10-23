@@ -7,4 +7,6 @@
 template <class T>
 bool compareNomes(T obj1, T obj2);
 
+std::string formataHoras(double segundos);
+
 #endif

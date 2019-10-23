@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <ctime>
+#include "global.hpp"
 
 class Midia
 {

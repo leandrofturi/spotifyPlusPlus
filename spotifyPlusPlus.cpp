@@ -45,7 +45,7 @@ int main ()
     teste.escreveEstatisticas();
 
 
-    teste.imprimeAssinantes();
+    //teste.imprimeAssinantes();
     //teste.imprimeProdutores();
     //teste.imprimeMidias();
 

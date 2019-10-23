@@ -45,10 +45,7 @@ void PlataformaDigital::setNome(std::string nome)
 void PlataformaDigital::addAssinante(Assinante* assinante)
 {
     if(this->buscaAssinante(assinante->getCodigo()) == NULL)
-    {
         this->assinantes->push_back(assinante);
-        this->assinantes->sort(compareNomes);
-    }
 }
 
 void PlataformaDigital::rmAssinante(Assinante* assinante)
@@ -189,6 +186,16 @@ void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
         }
     }
     std::cout << "################################" << std::endl << std::endl;
+}
+
+double PlataformaDigital::minutosPorGenero(Midia::Genero* genero)
+{
+    int min = 0;
+    for(Midia* aux : *this->midias)
+        if(aux->getGenero()->getSigla() == genero->getSigla())
+            min += aux->getDuracao();
+
+    return min;
 }
 
 void PlataformaDigital::addAlbum(Album* album)
@@ -519,7 +526,11 @@ void PlataformaDigital::escreveEstatisticas()
     }
 
     file << "Horas Consumidas: ";
-    //HC
+    double duracao;
+    duracao = 0;
+    for(Midia::Genero* aux : *this->generos)
+        duracao += this->minutosPorGenero(aux);
+    file << formataHoras(duracao*60);
     file << "minutos" << std::endl;
 
     file << "Genero mais ouvido: ";

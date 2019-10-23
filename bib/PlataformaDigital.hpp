@@ -54,6 +54,7 @@ public:
     void rmGenero(Midia::Genero* genero);
     Midia::Genero* buscaGenero(std::string sigla);
     void imprimeMidiasPorGenero(Midia::Genero* genero);
+    double minutosPorGenero(Midia::Genero* genero);
 
     void addAlbum(Album* album);
     void rmAlbum(Album* album);
