@@ -1,12 +1,13 @@
 #ifndef _PLATAFORMADIGITAL_HPP_
 #define _PLATAFORMADIGITAL_HPP_
 
+#define MIN(x, y) (x < y) ? x : y
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
 #include <list>
 #include <vector>
-#include "global.hpp"
 #include "Produtor.hpp"
 #include "Podcaster.hpp"
 #include "Artista.hpp"
@@ -14,6 +15,7 @@
 #include "Assinante.hpp"
 #include "Album.hpp"
 #include "../cpp-utils/util/StringUtils.h"
+#include "../cpp-utils/util/DateUtils.h"
 #include "../cpp-utils/util/Tokenizer.h"
 
 class PlataformaDigital
@@ -26,6 +28,10 @@ private:
     std::list<Midia*>* midias;
     std::list<Midia::Genero*>* generos;
     std::list<Album*>* albuns;
+
+    double minutosPorGenero(Midia::Genero* genero);
+    friend std::list<Midia*>* getFavoritas(Assinante* assinante);
+    Midia::Genero* generoMaisOuvido();
 
 public:
     PlataformaDigital();
@@ -54,7 +60,6 @@ public:
     void rmGenero(Midia::Genero* genero);
     Midia::Genero* buscaGenero(std::string sigla);
     void imprimeMidiasPorGenero(Midia::Genero* genero);
-    double minutosPorGenero(Midia::Genero* genero);
 
     void addAlbum(Album* album);
     void rmAlbum(Album* album);

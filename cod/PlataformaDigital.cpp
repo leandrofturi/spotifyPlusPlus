@@ -188,16 +188,6 @@ void PlataformaDigital::imprimeMidiasPorGenero(Midia::Genero* genero)
     std::cout << "################################" << std::endl << std::endl;
 }
 
-double PlataformaDigital::minutosPorGenero(Midia::Genero* genero)
-{
-    int min = 0;
-    for(Midia* aux : *this->midias)
-        if(aux->getGenero()->getSigla() == genero->getSigla())
-            min += aux->getDuracao();
-
-    return min;
-}
-
 void PlataformaDigital::addAlbum(Album* album)
 {
     if(this->buscaAlbum(album->getCodigo()) == NULL)
@@ -530,19 +520,22 @@ void PlataformaDigital::escreveEstatisticas()
     duracao = 0;
     for(Midia::Genero* aux : *this->generos)
         duracao += this->minutosPorGenero(aux);
-    file << formataHoras(duracao*60);
-    file << "minutos" << std::endl;
+    file << cpp_util::formatsHours(duracao*60);
+    file << " minutos" << std::endl;
 
     file << "Genero mais ouvido: ";
-    // G
+    file << this->generoMaisOuvido()->getNome();
     file << "-";
-    // MIn
-    file << "minutos";
+    file << cpp_util::formatsHours(60*this->minutosPorGenero(this->generoMaisOuvido()));
+    file << " minutos" << std::endl;
 
     file << "Mídias por Gênero:" << std::endl;
-    //G
-    file << ":";
-    //QG
+    for(Midia::Genero* aux : *this->generos)
+    {
+        file << aux->getNome();
+        file << " : ";
+        file << cpp_util::formatsHours(60*this->minutosPorGenero(aux)) << std:: endl;
+    }
 
     file << "Top 10 Midias:" << std::endl;
     //M
@@ -558,3 +551,37 @@ void PlataformaDigital::escreveEstatisticas()
 
     file.close();
 }
+
+// funcoes privadas
+double PlataformaDigital::minutosPorGenero(Midia::Genero* genero)
+{
+    int min = 0;
+    for(Midia* aux : *this->midias)
+        if(aux->getGenero()->getSigla() == genero->getSigla())
+            min += aux->getDuracao();
+
+    return min;
+}
+
+std::list<Midia*>* getFavoritas(Assinante* assinante)
+{
+    return assinante->favoritas;
+}
+
+Midia::Genero* PlataformaDigital::generoMaisOuvido()
+{
+    int duracao, duracaoMax = 2147483647;
+    Midia::Genero* genero;
+    for(Midia::Genero* auxGen : *this->generos)
+    {
+        duracao = 0;
+        for(Assinante* auxAss : *this->assinantes)
+            for(Midia* auxMid : *(getFavoritas(auxAss)))
+                if(auxMid->getGenero()->getSigla() == auxGen->getSigla())
+                    duracao += auxMid->getDuracao();
+        duracaoMax = MIN(duracaoMax, duracao);
+        genero = (duracaoMax == duracao) ? auxGen : genero;
+    }
+    return genero;
+}
+    

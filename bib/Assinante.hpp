@@ -12,6 +12,8 @@ class Assinante : public Usuario
 private:
     std::list<Midia*>* favoritas;
 
+    friend std::list<Midia*>* getFavoritas(Assinante* assinante);
+
 public:
     Assinante();
     Assinante(std::string nome, int codigo);

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <ctime>
-#include "global.hpp"
+#include "../cpp-utils/util/DateUtils.h"
 
 class Midia
 {

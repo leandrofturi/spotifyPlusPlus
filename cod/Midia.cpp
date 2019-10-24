@@ -71,7 +71,7 @@ void Midia::setDuracao(double duracao)
 
 std::string Midia::formataDuracao()
 {
-    return formataHoras(60*this->duracao);
+    return cpp_util::formatsHours(60*this->duracao);
 }
 
 int Midia::getAnoLancamento()

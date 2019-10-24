@@ -28,5 +28,7 @@ string formatDate(const time_t& t, const string& format);
 /* Verifies if a string contains a valid date according to a format. */
 bool validDate(const string& str, const string& format);
 
+std::string formatsHours(double sec);
+
 }
 #endif
