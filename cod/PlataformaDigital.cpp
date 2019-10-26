@@ -18,13 +18,22 @@ PlataformaDigital::PlataformaDigital(std::string nome)
     this->midias = new std::list<Midia*>;
     this->generos = new std::list<Midia::Genero*>;
     this->albuns = new std::list<Album*>;
+
+    std::cout << nome << " criada com sucesso!" << std::endl << std::endl;
 }
 
 PlataformaDigital::~PlataformaDigital()
 {
+    for(Assinante* aux : *(this->assinantes)) delete aux;
     for(Produtor* aux : *(this->produtores)) delete aux;
-    for(Midia* aux : *(this->midias)) delete aux;
+    for(Midia* aux : *(this->midias))
+        if(aux->getTipo() == "Musica")
+        {
+            Musica* auxMus = (Musica*) aux;
+            if(auxMus->getAlbum() == "") delete auxMus;
+        }
     for(Midia::Genero* aux : *(this->generos)) delete aux;
+    for(Album* aux : *(this->albuns)) delete aux;
 
     delete this->produtores;
     delete this->midias;
@@ -213,6 +222,10 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
+
+    std::cout << "Carregando usuarios..." << std::endl;
+
+    int contUsu = 0;
     int col;
     std::string linha;
     std::vector<std::string> cel;
@@ -253,19 +266,23 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
             {
                 usuario = new Podcaster(nome, stoi(codigo));
                 this->addProdutor((Podcaster*) usuario);
+                contUsu ++;
             }
             else if(tipo == "U")
             {
                 usuario = new Assinante(nome, stoi(codigo));
                 this->addAssinante((Assinante*) usuario);
+                contUsu ++;
             }
             else if(tipo == "A")
             {
                 usuario = new Artista(nome, stoi(codigo));
                 this->addProdutor((Artista*) usuario);
+                contUsu ++;
             }
         }
     }
+    std::cout << contUsu << " usuarios adicionados!" << std::endl << std::endl;
 }
 
 void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
@@ -275,6 +292,10 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
+
+    std::cout << "Carregando generos..." << std::endl;
+
+    int contGen = 0;
     int col;
     std::string linha;
     std::vector<std::string> cel;
@@ -305,8 +326,10 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
             Midia::Genero* genero;
             genero = new Midia::Genero(nome, sigla);
             this->addGenero(genero);
+            contGen ++;
         }
     }
+    std::cout << contGen << " generos adicionados!" << std::endl << std::endl;
 }
 
 void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
@@ -316,6 +339,10 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
+
+    std::cout << "Carregando midias..." << std::endl;
+
+    int contMid = 0;
     int col;
     std::string linha;
     std::vector<std::string> cel;
@@ -435,9 +462,11 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
                 }
             }
             this->addMidia(midia, produtores);
+            contMid ++;
         }
     }
     delete produtores;
+    std::cout << contMid << " midias adicionadas!" << std::endl << std::endl;
 }
 
 void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
@@ -447,6 +476,9 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
         return;
     }
+
+    std::cout << "Construindo favoritismos" << std::endl;
+
     int col;
     std::string linha;
     std::vector<std::string> cel;
@@ -509,6 +541,7 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
             }
         }
     }
+    std::cout << "Pronto!" << std::endl << std::endl;
 }
 
 void PlataformaDigital::escreveEstatisticas()
@@ -637,7 +670,6 @@ void PlataformaDigital::escreveFavoritas()
     std::cout << get_current_dir_name() << "/favoritos.csv" << std::endl << std::endl;
 }
 
-// funcoes privadas
 double PlataformaDigital::minutosOuvidosPorGenero(Midia::Genero* genero)
 {
     int min = 0;
@@ -647,16 +679,6 @@ double PlataformaDigital::minutosOuvidosPorGenero(Midia::Genero* genero)
                 min += aux->getDuracao();
 
     return min;
-}
-
-std::list<Midia*>* getFavoritas(Assinante* assinante)
-{
-    return assinante->favoritas;
-}
-
-std::list<Midia*>* getMidias(Produtor* produtor)
-{
-    return produtor->midias;
 }
 
 Midia::Genero* PlataformaDigital::generoMaisOuvido()
@@ -741,4 +763,15 @@ std::list<std::tuple<Produtor*, int> > PlataformaDigital::top10Produtores()
         produtores.pop_back();
 
     return produtores;
+}
+
+// FRIEND FUNCTIONS
+std::list<Midia*>* getFavoritas(Assinante* assinante)
+{
+    return assinante->favoritas;
+}
+
+std::list<Midia*>* getMidias(Produtor* produtor)
+{
+    return produtor->midias;
 }

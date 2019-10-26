@@ -5,6 +5,7 @@ Musica::Musica() {}
 Musica::Musica(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero)
     : Midia(nome, codigo, duracao, anoLancamento, genero)
 {
+    this->album = "";
     this->tipo = "MUSICA";
 }
 
