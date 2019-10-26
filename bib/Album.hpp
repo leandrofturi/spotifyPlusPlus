@@ -17,6 +17,8 @@ private:
 
     std::list<Musica*>* musicas;
 
+    friend std::list<Musica*>* getMusicas(Album* album);
+    
 public:
     Album();
     Album(std::string nome, int codigo, int duracao, int anoLancamento);

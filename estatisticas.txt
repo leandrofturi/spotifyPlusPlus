@@ -1,19 +1,42 @@
-Horas Consumidas: 11:24:0 minutos
-Genero mais ouvido: Rap-0:0:0 minutos
+Horas Consumidas: 9:23:0 minutos
+
+Genero mais ouvido: Rap - 0:0:0 minutos
+
 Mídias por Gênero:
-Rock : 0:43:0
-Indie : 0:39:0
-Blues : 0:0:0
-Rap : 0:0:0
-Pop : 14:37:0
-Hip-Hop : 0:28:0
-K-Pop : 0:9:0
-Funk : 0:30:0
-Sertanejo : 0:42:0
-Eletrônica : 0:23:0
-Geek : 8:42:0
-Atualidades : 6:41:0
-Noticias : 1:50:0
+Rock : 2:14:0
+Indie : 1:53:0
+Blues : 0:0:0
+Rap : 0:0:0
+Pop : 8:51:0
+Hip-Hop : 1:22:0
+K-Pop : 0:21:0
+Funk : 1:34:0
+Sertanejo : 2:10:0
+Eletrônica : 1:6:0
+Geek : 8:18:0
+Atualidades : 0:22:0
+Noticias : 5:12:0
+
 Top 10 Midias:
-::Top 10 Produtores:
-:
+Queen of California : Rock : 0
+The Age of Worry : Rock : 0
+Shadow Days : Rock : 0
+Speak For Me : Rock : 0
+Something Like Olivia : Rock : 0
+Born and Raised : Rock : 0
+Still Feel Like Your Man : Rock : 0
+Emoji of a Wave : Rock : 0
+Helpless : Rock : 0
+Love on the Weekend : Rock : 0
+
+Top 10 Produtores:
+MC Livinho : 0
+Wesley Safadão : 0
+Marilía Mendonça : 0
+Luan Santana : 0
+Allok : 0
+Avicii : 0
+Cardi B : 0
+Billy Ray Cyrus : 0
+Snoop Dog : 0
+Clarisse : 0

@@ -239,6 +239,8 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
             codigo = cpp_util::trim(cel[0]);
             tipo = cpp_util::trim(cel[1]);
             nome = cel[2];
+            nome = cpp_util::removeChar(nome, (char) 13);
+            nome = cpp_util::removeChar(nome, (char) 10);
 
             if(!cpp_util::isNumber(codigo))
             {
@@ -297,6 +299,8 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
             }
             sigla = cpp_util::trim(cel[0]);
             nome = cel[1];
+            nome = cpp_util::removeChar(nome, (char) 13);
+            nome = cpp_util::removeChar(nome, (char) 10);
 
             Midia::Genero* genero;
             genero = new Midia::Genero(nome, sigla);
@@ -348,6 +352,8 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
 
             codigo = cpp_util::trim(cel[0]);
             nome = cpp_util::trim(cel[1]);
+            nome = cpp_util::removeChar(nome, (char) 13);
+            nome = cpp_util::removeChar(nome, (char) 10);
             tipo = cpp_util::trim(cel[2]);
             tokComma.overwriteStream(cpp_util::trim(cel[3]));
             vetProdutores = tokComma.remaining();
@@ -515,50 +521,159 @@ void PlataformaDigital::escreveEstatisticas()
         return;
     }
 
+    std::cout << "Escrevendo estatisticas..." << std::endl;
+    
     file << "Horas Consumidas: ";
     double duracao;
     duracao = 0;
     for(Midia::Genero* aux : *this->generos)
-        duracao += this->minutosPorGenero(aux);
+        duracao += this->minutosOuvidosPorGenero(aux);
     file << cpp_util::formatsHours(duracao*60);
     file << " minutos" << std::endl;
+    file << std::endl;
 
     file << "Genero mais ouvido: ";
     file << this->generoMaisOuvido()->getNome();
-    file << "-";
-    file << cpp_util::formatsHours(60*this->minutosPorGenero(this->generoMaisOuvido()));
+    file << " - ";
+    file << cpp_util::formatsHours(60*this->minutosOuvidosPorGenero(this->generoMaisOuvido()));
     file << " minutos" << std::endl;
+    file << std::endl;
 
     file << "Mídias por Gênero:" << std::endl;
     for(Midia::Genero* aux : *this->generos)
     {
         file << aux->getNome();
         file << " : ";
-        file << cpp_util::formatsHours(60*this->minutosPorGenero(aux)) << std:: endl;
+        file << cpp_util::formatsHours(60*this->minutosOuvidosPorGenero(aux)) << std:: endl;
     }
+    file << std::endl;
 
     file << "Top 10 Midias:" << std::endl;
-    //M
-    file << ":";
-    //G
-    file << ":";
-    //NF
+    for(std::tuple<Midia*, int> auxTupla : top10Midias())
+    {
+        file << std::get<0>(auxTupla)->getNome();
+        file << " : ";
+        file << std::get<0>(auxTupla)->getGenero()->getNome();
+        file << " : ";
+        file << std::get<1>(auxTupla) << std:: endl;;
+    }
+    file << std::endl;
 
     file << "Top 10 Produtores:" << std::endl;
-    //P
-    file << ":";
-    //NF
+    for(std::tuple<Produtor*, int> auxTupla : top10Produtores())
+    {
+        file << std::get<0>(auxTupla)->getNome();
+        file << " : ";
+        file << std::get<1>(auxTupla) << std:: endl;;
+    }
 
     file.close();
+    std::cout << get_current_dir_name() << "/estatisticas.txt" << std::endl << std::endl;
+}
+
+void PlataformaDigital::escreveMidiasPorProdutores()
+{
+    std::ofstream file;
+    file.open("produtores.csv", std::ios::out);
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    std::cout << "Escrevendo midias por produtores..." << std::endl;
+
+    for(Produtor* auxProd : *this->produtores)
+    {
+        file << auxProd->getNome();
+        file << ";";
+        for(Midia* auxMid : *getMidias(auxProd))
+        {
+            if(auxMid != *getMidias(auxProd)->begin())
+                file << ",";
+            file << auxMid->getNome();
+        }
+        file << std::endl;
+    }
+
+    file.close();
+    std::cout << get_current_dir_name() << "/produtores.csv" << std::endl << std::endl;
+}
+
+void PlataformaDigital::escreveBackup()
+{
+    std::ofstream file;
+    file.open("backup.txt", std::ios::out);
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    std::cout << "Escrevendo backup..." << std::endl;
+
+    file << "Usuarios:" << std::endl;
+    for(Usuario* auxUs : *this->assinantes)
+    {
+        file << auxUs->getCodigo();
+        file << " : ";
+        file << auxUs->getNome() << std::endl;
+    }
+    for(Usuario* auxUs : *this->produtores)
+    {
+        file << auxUs->getCodigo();
+        file << " : ";
+        file << auxUs->getNome() << std::endl;
+    }
+
+    file << std::endl;
+    file << "Midias:" << std::endl;
+    for(Midia* auxMid : *this->midias)
+    {
+        file << auxMid->getNome();
+        file << " : ";
+        file << auxMid->getTipo();
+        file << " : ";
+        for(Produtor* auxProd : *this->produtores)
+            for(Midia* auxMidiaProd : *getMidias(auxProd))
+                if(auxMidiaProd->getCodigo() == auxMid->getCodigo())
+                {
+                    file << auxProd->getNome();
+                    file << ",";
+                }
+        file << " : ";
+        file << auxMid->formataDuracao();
+        file << " : ";
+        file << auxMid->getGenero()->getNome();
+        file << " : ";
+        if(auxMid->getTipo() == "Podcast")
+        {
+            Podcast* auxPod = (Podcast*) auxMid;
+            file << auxPod->getQtdTemporadas();
+        }
+        if(auxMid->getTipo() == "Musica")
+            for(Album* auxAlbum : *this->albuns)
+                for(Midia* auxMidAlb : *getMusicas(auxAlbum))
+                    if(auxMidAlb->getCodigo() == auxMid->getCodigo())
+                        file << auxAlbum->getNome();
+        
+        file << " : ";
+        file << auxMid->getAnoLancamento();
+        file << std::endl;
+    }
+
+    file.close();
+    std::cout << get_current_dir_name() << "/backup.txt" << std::endl << std::endl;
 }
 
 // funcoes privadas
-double PlataformaDigital::minutosPorGenero(Midia::Genero* genero)
+double PlataformaDigital::minutosOuvidosPorGenero(Midia::Genero* genero)
 {
     int min = 0;
-    for(Midia* aux : *this->midias)
-        if(aux->getGenero()->getSigla() == genero->getSigla())
-            min += aux->getDuracao();
+    for(Assinante* auxAss : *this->assinantes)
+        for(Midia* aux : *getFavoritas(auxAss))
+            if(aux->getGenero()->getSigla() == genero->getSigla())
+                min += aux->getDuracao();
 
     return min;
 }
@@ -584,4 +699,101 @@ Midia::Genero* PlataformaDigital::generoMaisOuvido()
     }
     return genero;
 }
+
+std::list<std::tuple<Midia*, int> > PlataformaDigital::top10Midias()
+{
+    std::list<std::tuple<Midia*, int> > midias;
+    for(Midia* auxMid : *this->midias)
+        midias.push_back({auxMid, 0});
+
+    for(Assinante* auxAss : *this->assinantes)
+        for(Midia* auxMid : *(getFavoritas(auxAss)))
+            for(std::tuple<Midia*, int> auxTupla : midias)
+                if(auxMid->getCodigo() == std::get<0>(auxTupla)->getCodigo())
+                {
+                    std::get<1>(auxTupla) ++;
+                    break;
+                }
+
+    std::tuple<Midia*, int> auxDeVerdade;
+    for(std::tuple<Midia*, int> auxTupla : midias)
+        for(std::tuple<Midia*, int> auxTupla2 : midias)
+            if(std::get<1>(auxTupla) < std::get<1>(auxTupla2))
+            {
+                auxDeVerdade = auxTupla;
+                auxTupla = auxTupla2;
+                auxTupla2 = auxDeVerdade;
+            }
+
+    while(midias.size() > 10)
+        midias.pop_back();
     
+    return midias;
+}
+
+std::list<std::tuple<Produtor*, int> > PlataformaDigital::top10Produtores()
+{
+    std::list<std::tuple<Midia*, int> > midias;
+    for(Midia* auxMid : *this->midias)
+        midias.push_back({auxMid, 0});
+
+    for(Assinante* auxAss : *this->assinantes)
+        for(Midia* auxMid : *(getFavoritas(auxAss)))
+            for(std::tuple<Midia*, int> auxTupla : midias)
+                if(auxMid->getCodigo() == std::get<0>(auxTupla)->getCodigo())
+                {
+                    std::get<1>(auxTupla) ++;
+                    break;
+                }
+
+    std::tuple<Midia*, int> auxDeVerdade;
+    for(std::tuple<Midia*, int> auxTupla : midias)
+        for(std::tuple<Midia*, int> auxTupla2 : midias)
+            if(std::get<1>(auxTupla) < std::get<1>(auxTupla2))
+            {
+                auxDeVerdade = auxTupla;
+                auxTupla = auxTupla2;
+                auxTupla2 = auxDeVerdade;
+            }
+
+    std::list<std::tuple<Produtor*, int> > produtores;
+    for(Produtor* auxProd : *this->produtores)
+        produtores.push_back({auxProd, 0});
+    
+    for(std::tuple<Produtor*, int> auxTuplaProd : produtores)
+        for(std::tuple<Midia*, int> auxTuplaMidias : midias)
+            for(Midia* auxMid : *getMidias(std::get<0>(auxTuplaProd)))
+                if(std::get<0>(auxTuplaMidias)->getCodigo() == auxMid->getCodigo())
+                    std::get<1>(auxTuplaMidias) ++;
+
+    std::tuple<Produtor*, int> auxDeVerdadeProd;
+    for(std::tuple<Produtor*, int> auxTuplaProd : produtores)
+        for(std::tuple<Produtor*, int> auxTupla2Prod : produtores)
+            if(std::get<1>(auxTuplaProd) < std::get<1>(auxTupla2Prod))
+            {
+                auxDeVerdadeProd = auxTuplaProd;
+                auxTuplaProd = auxTupla2Prod;
+                auxTupla2Prod = auxDeVerdadeProd;
+            }
+
+    while(produtores.size() > 10)
+        produtores.pop_front();
+
+    return produtores;
+}
+
+std::list<Midia*>* getMidias(Produtor* produtor)
+{
+    return produtor->midias;
+}
+
+std::list<Musica*>* getMusicas(Album* album)
+{
+    return album->musicas;
+}
+
+template <class T>
+bool PlataformaDigital::ordenaPorNome(T* class1, T* class2)
+{
+    return cpp_util::stringCompare(class1->getNome(), class2->getNome());
+}

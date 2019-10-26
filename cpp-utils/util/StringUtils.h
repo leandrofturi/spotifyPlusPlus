@@ -30,5 +30,7 @@ bool stringCompare(string s1, string s2);
 
 bool isNumber(string& s);
 
+string& removeChar(string& s, char c);
+
 }
 #endif

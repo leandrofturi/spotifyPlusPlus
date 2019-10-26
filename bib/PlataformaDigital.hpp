@@ -8,6 +8,8 @@
 #include <cmath>
 #include <list>
 #include <vector>
+#include <tuple>
+#include <unistd.h>
 #include "Produtor.hpp"
 #include "Podcaster.hpp"
 #include "Artista.hpp"
@@ -29,9 +31,16 @@ private:
     std::list<Midia::Genero*>* generos;
     std::list<Album*>* albuns;
 
-    double minutosPorGenero(Midia::Genero* genero);
+    double minutosOuvidosPorGenero(Midia::Genero* genero);
     friend std::list<Midia*>* getFavoritas(Assinante* assinante);
     Midia::Genero* generoMaisOuvido();
+    std::list<std::tuple<Midia*, int> > top10Midias();
+    std::list<std::tuple<Produtor*, int> > top10Produtores();
+    friend std::list<Midia*>* getMidias(Produtor* produtor);
+    friend std::list<Musica*>* getMusicas(Album* album);
+
+    template <class T>
+    bool ordenaPorNome(T* class1, T* class2);
 
 public:
     PlataformaDigital();

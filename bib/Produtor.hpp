@@ -11,6 +11,8 @@ class Produtor : public Usuario
 private:
     std::list<Midia*>* midias;
 
+    friend std::list<Midia*>* getMidias(Produtor* produtor);
+
 public:
     Produtor();
     Produtor(std::string nome, int codigo);

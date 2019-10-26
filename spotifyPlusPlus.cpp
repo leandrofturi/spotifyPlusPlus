@@ -43,6 +43,8 @@ int main ()
 
     
     teste.escreveEstatisticas();
+    teste.escreveMidiasPorProdutores();
+    teste.escreveBackup();
 
 
     //teste.imprimeAssinantes();
