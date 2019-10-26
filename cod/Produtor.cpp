@@ -50,3 +50,22 @@ void Produtor::imprimeMidias()
     }
     std::cout << "################################" << std::endl << std::endl;
 }
+
+void Produtor::escreveMidiasNoArquivo(std::ofstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    file << this->getNome();
+    file << " : ";
+    for(Midia* auxMid : *this->midias)
+    {
+        if(auxMid != *this->midias->begin())
+            file << ", ";
+        file << auxMid->getNome();
+    }
+    file << std::endl;
+}

@@ -1,7 +1,7 @@
 #ifndef _PLATAFORMADIGITAL_HPP_
 #define _PLATAFORMADIGITAL_HPP_
 
-#define MIN(x, y) (x < y) ? x : y
+#define MAX(x, y) (x > y) ? x : y
 
 #include <iostream>
 #include <fstream>
@@ -37,10 +37,6 @@ private:
     std::list<std::tuple<Midia*, int> > top10Midias();
     std::list<std::tuple<Produtor*, int> > top10Produtores();
     friend std::list<Midia*>* getMidias(Produtor* produtor);
-    friend std::list<Musica*>* getMusicas(Album* album);
-
-    template <class T>
-    bool ordenaPorNome(T* class1, T* class2);
 
 public:
     PlataformaDigital();
@@ -79,12 +75,13 @@ public:
     void carregaArquivoMidias(std::ifstream& file);
     void carregaArquivoFavoritos(std::ifstream& file);
 
-    //void imprimeNoArquivo(std::ofstream& file);
+    //void escreveNoArquivo(std::ofstream& file);
     //void exportarBiblioteca();
     //void gerarRelatorios();
     void escreveEstatisticas();
     void escreveMidiasPorProdutores();
     void escreveBackup();
+    void escreveFavoritas();
 };
 
 #endif

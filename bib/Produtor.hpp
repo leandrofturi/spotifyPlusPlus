@@ -23,7 +23,7 @@ public:
     Midia* buscaMidia(int codigo);
     void imprimeMidias();
 
-    //virtual void imprimeNoArquivo(std::ofstream& file) = 0;
+    void escreveMidiasNoArquivo(std::ofstream& file);
 };
 
 #endif

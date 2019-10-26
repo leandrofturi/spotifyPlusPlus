@@ -2,6 +2,7 @@
 #define _ASSINANTE_HPP_
 
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <algorithm>
 #include "Usuario.hpp"
@@ -24,7 +25,7 @@ public:
     Midia* buscaFavorita(int codigo);
     void imprimeFavoritas();
 
-    //void imprimeNoArquivo(std::ofstream& file);
+    void escreveMidiaNoArquivo(std::ofstream& file);
 };
 
 #endif

@@ -21,8 +21,6 @@ public:
     void rmPodcast(Podcast* podcast);
     Podcast* buscaPodcast(int codigo);
     void imprimePodcast();
-
-    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

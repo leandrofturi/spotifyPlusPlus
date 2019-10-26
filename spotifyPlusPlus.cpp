@@ -20,33 +20,34 @@
 int main ()
 {
     std::ifstream file;
-    PlataformaDigital teste("Teste");
+    PlataformaDigital* teste = new PlataformaDigital("Teste");
     Midia::Genero genero("Indie", "IN");
 
     file.open("entradas/usuarios.csv");
-    teste.carregaArquivoUsuarios(file);
+    teste->carregaArquivoUsuarios(file);
     file.close();
     //teste.imprimeAssinantes();
 
     file.open("entradas/generos.csv");
-    teste.carregaArquivoGeneros(file);
+    teste->carregaArquivoGeneros(file);
     file.close();
 
     file.open("entradas/midias_corrigidas.csv");
-    teste.carregaArquivoMidias(file);
+    teste->carregaArquivoMidias(file);
     file.close();
     //teste.imprimeMidiasPorGenero(&genero);
 
     file.open("entradas/favoritos.csv");
-    teste.carregaArquivoFavoritos(file);
+    teste->carregaArquivoFavoritos(file);
     file.close();
 
     
-    teste.escreveEstatisticas();
-    teste.escreveMidiasPorProdutores();
-    teste.escreveBackup();
+    teste->escreveEstatisticas();
+    teste->escreveMidiasPorProdutores();
+    teste->escreveBackup();
+    teste->escreveFavoritas();
 
-
+    delete teste;
     //teste.imprimeAssinantes();
     //teste.imprimeProdutores();
     //teste.imprimeMidias();

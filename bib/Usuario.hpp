@@ -19,7 +19,7 @@ public:
     void setNome(std::string nome);
     int getCodigo();
 
-    //virtual void imprimeNoArquivo(std::ofstream& file) = 0;
+    void escreveNoArquivo(std::ofstream& file);
 };
 
 #endif

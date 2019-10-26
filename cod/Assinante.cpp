@@ -50,3 +50,26 @@ void Assinante::imprimeFavoritas()
     }
     std::cout << "################################" << std::endl << std::endl;
 }
+
+void Assinante::escreveMidiaNoArquivo(std::ofstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    for(Midia* auxMid : *this->favoritas)
+    {
+        file << this->codigo;
+        file << ";";
+        file << auxMid->getTipo();
+        file << ";";
+        file << auxMid->getCodigo();
+        file << ";";
+        file << auxMid->getGenero()->getNome();
+        file << ";";
+        file << auxMid->formataDuracao();
+        file << std::endl;
+    }
+}

@@ -102,6 +102,29 @@ Midia::Genero* Midia::getGenero()
     return this->genero;
 }
 
+std::string Midia::getProdutores()
+{
+    std::string produtores;
+    for(std::string aux : this->produtores)
+    {
+        produtores.append(aux);
+        produtores.append(",");
+    }
+    return produtores.substr(0, produtores.size()-1);
+}
+
+void Midia::addProdutor(std::string produtor)
+{
+    for(std::string aux : this->produtores)
+        if(aux == produtor) return;
+    this->produtores.push_back(produtor);
+}
+
+void Midia::rmProdutor(std::string produtor)
+{
+    this->produtores.remove(produtor);
+}
+
 void Midia::imprimeQtdMidias()
 {
     std::cout << std::endl << "################################" << std::endl << std::endl;

@@ -68,12 +68,18 @@ int Album::getQtdMusicas()
 void Album::addMusica(Musica* musica)
 {
     if(this->buscaMusica(musica->getCodigo()) == NULL)
+    {
+        musica->setAlbum(this->nome);
         this->musicas->push_back(musica);
+        this->qtdMusicas ++;
+    }
 }
 
 void Album::rmMusica(Musica* musica)
 {
+    musica->setAlbum("");
     this->musicas->remove(musica);
+    this->qtdMusicas --;
 }
 
 Musica* Album::buscaMusica(int codigo)

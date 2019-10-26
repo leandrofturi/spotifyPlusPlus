@@ -32,3 +32,27 @@ void Podcast::imprimeInfoMidia()
     std::cout << "Quantidade de temporadas: " << this->getQtdTemporadas() << std::endl;
     std::cout << std::endl << "################################" << std::endl << std::endl;
 }
+
+void Podcast::escreveNoArquivo(std::ofstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    file << this->getNome();
+    file << " : ";
+    file << this->getTipo();
+    file << " : ";
+    file << this->getProdutores();
+    file << " : ";
+    file << this->formataDuracao();
+    file << " : ";
+    file << this->genero->getNome();
+    file << " : ";
+    file << this->qtdTemporadas;
+    file << " : ";
+    file << this->anoLancamento;
+    file << std::endl;
+}

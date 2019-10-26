@@ -16,8 +16,6 @@ private:
     int qtdMusicas;
 
     std::list<Musica*>* musicas;
-
-    friend std::list<Musica*>* getMusicas(Album* album);
     
 public:
     Album();
