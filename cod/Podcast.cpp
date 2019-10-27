@@ -42,17 +42,17 @@ void Podcast::escreveNoArquivo(std::ofstream& file)
     }
 
     file << this->getNome();
-    file << " : ";
+    file << ":";
     file << this->getTipo();
-    file << " : ";
+    file << ":";
     file << this->getProdutores();
-    file << " : ";
+    file << ":";
     file << this->formataDuracao();
-    file << " : ";
+    file << ":";
     file << this->genero->getNome();
-    file << " : ";
+    file << ":";
     file << this->qtdTemporadas;
-    file << " : ";
+    file << ":";
     file << this->anoLancamento;
     file << std::endl;
 }

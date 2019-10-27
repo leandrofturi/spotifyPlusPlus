@@ -5,6 +5,7 @@
 #include <list>
 #include "Usuario.hpp"
 #include "Midia.hpp"
+#include "../cpp-utils/util/StringUtils.h"
 
 class Produtor : public Usuario
 {
@@ -25,5 +26,8 @@ public:
 
     void escreveMidiasNoArquivo(std::ofstream& file);
 };
+
+template <typename T>
+bool ordenaCrescPorNome(T *obj1, T *obj2);
 
 #endif

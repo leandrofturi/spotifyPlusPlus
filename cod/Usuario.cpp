@@ -34,7 +34,7 @@ void Usuario::escreveNoArquivo(std::ofstream& file)
     }
 
     file << this->getCodigo();
-    file << " : ";
+    file << ":";
     file << this->getNome();
     file << std::endl;
 }

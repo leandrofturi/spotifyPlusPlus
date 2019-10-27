@@ -547,7 +547,7 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
 void PlataformaDigital::escreveEstatisticas()
 {
     std::ofstream file;
-    file.open("estatisticas.txt", std::ios::out);
+    file.open("1-estatisticas.txt", std::ios::out);
     if(!file.is_open())
     {
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
@@ -576,7 +576,7 @@ void PlataformaDigital::escreveEstatisticas()
     for(Midia::Genero* aux : *this->generos)
     {
         file << aux->getNome();
-        file << " : ";
+        file << ":";
         file << cpp_util::formatsHours(60*this->minutosOuvidosPorGenero(aux)) << std:: endl;
     }
     file << std::endl;
@@ -585,9 +585,9 @@ void PlataformaDigital::escreveEstatisticas()
     for(std::tuple<Midia*, int> auxTupla : top10Midias())
     {
         file << std::get<0>(auxTupla)->getNome();
-        file << " : ";
+        file << ":";
         file << std::get<0>(auxTupla)->getGenero()->getNome();
-        file << " : ";
+        file << ":";
         file << std::get<1>(auxTupla) << std:: endl;;
     }
     file << std::endl;
@@ -596,18 +596,18 @@ void PlataformaDigital::escreveEstatisticas()
     for(std::tuple<Produtor*, int> auxTupla : top10Produtores())
     {
         file << std::get<0>(auxTupla)->getNome();
-        file << " : ";
+        file << ":";
         file << std::get<1>(auxTupla) << std:: endl;;
     }
 
     file.close();
-    std::cout << get_current_dir_name() << "/estatisticas.txt" << std::endl << std::endl;
+    std::cout << get_current_dir_name() << "/1-estatisticas.txt" << std::endl << std::endl;
 }
 
 void PlataformaDigital::escreveMidiasPorProdutores()
 {
     std::ofstream file;
-    file.open("produtores.csv", std::ios::out);
+    file.open("2-produtores.csv", std::ios::out);
     if(!file.is_open())
     {
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
@@ -616,18 +616,18 @@ void PlataformaDigital::escreveMidiasPorProdutores()
 
     std::cout << "Escrevendo midias por produtores..." << std::endl;
 
-    //this->produtores->sort(ordenaPorNome());
+    this->produtores->sort(ordenaCrescPorNome<Produtor>);
     for(Produtor* auxProd : *this->produtores)
         auxProd->escreveMidiasNoArquivo(file);
 
     file.close();
-    std::cout << get_current_dir_name() << "/produtores.csv" << std::endl << std::endl;
+    std::cout << get_current_dir_name() << "/2-produtores.csv" << std::endl << std::endl;
 }
 
 void PlataformaDigital::escreveBackup()
 {
     std::ofstream file;
-    file.open("backup.txt", std::ios::out);
+    file.open("4-backup.txt", std::ios::out);
     if(!file.is_open())
     {
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
@@ -648,13 +648,13 @@ void PlataformaDigital::escreveBackup()
         auxMid->escreveNoArquivo(file);
 
     file.close();
-    std::cout << get_current_dir_name() << "/backup.txt" << std::endl << std::endl;
+    std::cout << get_current_dir_name() << "/4-backup.txt" << std::endl << std::endl;
 }
 
 void PlataformaDigital::escreveFavoritas()
 {
     std::ofstream file;
-    file.open("favoritos.csv", std::ios::out);
+    file.open("3-favoritos.csv", std::ios::out);
     if(!file.is_open())
     {
         std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
@@ -663,11 +663,12 @@ void PlataformaDigital::escreveFavoritas()
 
     std::cout << "Escrevendo favoritos..." << std::endl;
 
+    this->assinantes->sort(ordenaCrescPorCodigo<Assinante>);
     for(Assinante* auxAss : *this->assinantes)
         auxAss->escreveMidiaNoArquivo(file);
 
     file.close();
-    std::cout << get_current_dir_name() << "/favoritos.csv" << std::endl << std::endl;
+    std::cout << get_current_dir_name() << "/3-favoritos.csv" << std::endl << std::endl;
 }
 
 double PlataformaDigital::minutosOuvidosPorGenero(Midia::Genero* genero)
@@ -774,4 +775,16 @@ std::list<Midia*>* getFavoritas(Assinante* assinante)
 std::list<Midia*>* getMidias(Produtor* produtor)
 {
     return produtor->midias;
+}
+
+template <typename T>
+bool ordenaCrescPorCodigo(T *obj1, T *obj2)
+{
+    return obj1->getCodigo() < obj2->getCodigo();
+}
+
+template <typename T>
+bool ordenaCrescPorNome(T *obj1, T *obj2)
+{
+    return cpp_util::stringCompare(obj1->getNome(), obj2->getNome());
 }

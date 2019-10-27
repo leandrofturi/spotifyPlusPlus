@@ -84,4 +84,10 @@ public:
     void escreveFavoritas();
 };
 
+template <typename T>
+bool ordenaCrescPorCodigo(T *obj1, T *obj2);
+
+template <typename T>
+bool ordenaCrescPorNome(T *obj1, T *obj2);
+
 #endif

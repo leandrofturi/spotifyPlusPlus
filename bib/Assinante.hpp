@@ -28,4 +28,7 @@ public:
     void escreveMidiaNoArquivo(std::ofstream& file);
 };
 
+template <typename T>
+bool ordenaCrescPorCodigo(T *obj1, T *obj2);
+
 #endif
