@@ -13,6 +13,7 @@ class Assinante : public Usuario
 private:
     std::list<Midia*>* favoritas;
 
+    //OBJETIVOS ESPECIFICOS PARA GERACAO DE RELATORIOS, IMPLEMENTADO EM PLATAFORMADIGITAL
     friend std::list<Midia*>* getFavoritas(Assinante* assinante);
 
 public:
@@ -28,6 +29,7 @@ public:
     void escreveMidiaNoArquivo(std::ofstream& file);
 };
 
+//METODO DE ORDENACAO
 template <typename T>
 bool ordenaCrescPorCodigo(T *obj1, T *obj2);
 

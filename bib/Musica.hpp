@@ -16,6 +16,7 @@ public:
     Musica(std::string nome, int codigo, int duracao, int anoLancamento, Midia::Genero* genero);
     ~Musica();
 
+    //VOLTADO PARA IMPRESSAO DE ATRIBUTOS
     std::string getAlbum();
     void setAlbum(std::string album);
 

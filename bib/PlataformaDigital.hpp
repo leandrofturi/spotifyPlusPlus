@@ -31,12 +31,15 @@ private:
     std::list<Midia::Genero*>* generos;
     std::list<Album*>* albuns;
 
-    double minutosOuvidosPorGenero(Midia::Genero* genero);
+    //ACESSO DAS LISTAS DE MIDIAS DIRETAMENTE
     friend std::list<Midia*>* getFavoritas(Assinante* assinante);
-    Midia::Genero* generoMaisOuvido();
-    std::list<std::tuple<Midia*, int> > top10Midias();
-    std::list<std::tuple<Produtor*, int> > top10Produtores();
     friend std::list<Midia*>* getMidias(Produtor* produtor);
+
+    //OBJETIVOS ESPECIFICOS PARA GERACAO DE RELATORIOS
+    std::list<std::tuple<Midia*, int> > top10Midias();
+    //<MIDIA, QTD DE VEZES QUE FOI FAVORITADA>
+    std::list<std::tuple<Produtor*, int> > top10Produtores();
+    //<PRODUTOR, QTD DE MIDIAS FAVORITADAS>
 
 public:
     PlataformaDigital();
@@ -55,16 +58,23 @@ public:
     void rmProdutor(Produtor* produtor);
     Produtor* buscaProdutor(int codigo);
     void imprimeProdutores();
+    double minutosOuvidosPorProdutor(Produtor* produtor);
+    int qtdMusicasFavoritadasPorProdutor(Produtor* produtor);
 
     void addMidia(Midia* midia, std::list<Produtor*>* produtores);
     void rmMidia(Midia* midia);
     Midia* buscaMidia(int codigo);
     void imprimeMidias();
+    double minutosOuvidosPorMidia(Midia* midia);
+    int qtdVezesFavoritada(Midia* midia);
 
     void addGenero(Midia::Genero* genero);
     void rmGenero(Midia::Genero* genero);
     Midia::Genero* buscaGenero(std::string sigla);
     void imprimeMidiasPorGenero(Midia::Genero* genero);
+    Midia::Genero* generoMaisOuvido();
+    double minutosOuvidosPorGenero(Midia::Genero* genero);
+    int qtdMusicasFavoritadasPorGenero(Midia::Genero* genero);
 
     void addAlbum(Album* album);
     void rmAlbum(Album* album);
@@ -75,19 +85,23 @@ public:
     void carregaArquivoMidias(std::ifstream& file);
     void carregaArquivoFavoritos(std::ifstream& file);
 
-    //void escreveNoArquivo(std::ofstream& file);
-    //void exportarBiblioteca();
-    //void gerarRelatorios();
     void escreveEstatisticas();
     void escreveMidiasPorProdutores();
-    void escreveBackup();
     void escreveFavoritas();
+    void escreveBackup();
 };
 
+//METODOS DE ORDENACAO
 template <typename T>
 bool ordenaCrescPorCodigo(T *obj1, T *obj2);
 
 template <typename T>
 bool ordenaCrescPorNome(T *obj1, T *obj2);
+
+template <typename T>
+bool ordenaDecPor2Elemento(std::tuple<T*, int> obj1, std::tuple<T*, int> obj);
+
+//INICIALIZACAO DA PLATAFORMA
+PlataformaDigital* inicializaSpotifyPlusPlus(std::string fileUsuarios, std::string fileGeneros, std::string fileMidias, std::string fileFavoritas);
 
 #endif

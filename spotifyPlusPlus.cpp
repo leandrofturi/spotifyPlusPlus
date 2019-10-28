@@ -17,40 +17,24 @@
 #include "cpp-utils/util/Tokenizer.h"
 
 
-int main ()
+int main (int argc, char *argv[])
 {
-    std::ifstream file;
-    PlataformaDigital* teste = new PlataformaDigital("Teste");
-    Midia::Genero genero("Indie", "IN");
+    std::string fileUsuarios, fileGeneros, fileMidias, fileFavoritas;
+    for (int i = 1; i < argc-1; i ++)
+    {
+        std::string s(argv[i]);
+        std::string f(argv[i+1]);
+        if(s == "-u")
+            fileUsuarios = f;
+        else if(s == "-g")
+            fileGeneros = f;
+        else if(s == "-m")
+            fileMidias = f;
+        else if(s == "-f")
+            fileFavoritas = f;
+    }
+    PlataformaDigital* plataforma = inicializaSpotifyPlusPlus(fileUsuarios, fileGeneros, fileMidias, fileFavoritas);
 
-    file.open("entradas/usuarios.csv");
-    teste->carregaArquivoUsuarios(file);
-    file.close();
-    //teste.imprimeAssinantes();
-
-    file.open("entradas/generos.csv");
-    teste->carregaArquivoGeneros(file);
-    file.close();
-
-    file.open("entradas/midias_corrigidas.csv");
-    teste->carregaArquivoMidias(file);
-    file.close();
-    //teste.imprimeMidiasPorGenero(&genero);
-
-    file.open("entradas/favoritos.csv");
-    teste->carregaArquivoFavoritos(file);
-    file.close();
-
-    
-    teste->escreveEstatisticas();
-    teste->escreveMidiasPorProdutores();
-    teste->escreveBackup();
-    teste->escreveFavoritas();
-
-    delete teste;
-    //teste.imprimeAssinantes();
-    //teste.imprimeProdutores();
-    //teste.imprimeMidias();
-
+    delete plataforma;
     return 0;
 }

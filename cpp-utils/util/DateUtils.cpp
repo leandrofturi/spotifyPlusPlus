@@ -50,15 +50,13 @@ bool validDate(const string& str, const string& format) {
 
 std::string formatsHours(double sec)
 {
-    std::string hour;
     time_t seconds(sec);
-    tm t = *gmtime(&seconds);
-    hour.append(std::to_string(t.tm_hour));
-    hour.append(":");
-    hour.append(std::to_string(t.tm_min));
-    hour.append(":");
-    hour.append(std::to_string(t.tm_sec));
-    return hour;
+    tm* tm = gmtime(&seconds);
+
+	char buffer[MAX_DATE_STRING_SIZE];
+	strftime(buffer, MAX_DATE_STRING_SIZE, "%H:%M:%S", tm);
+
+    return buffer;
 }
 
 }

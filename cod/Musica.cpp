@@ -46,7 +46,7 @@ void Musica::escreveNoArquivo(std::ofstream& file)
     file << ":";
     file << this->getProdutores();
     file << ":";
-    file << this->formataDuracao();
+    file << this->getDuracao();
     file << ":";
     file << this->genero->getNome();
     file << ":";

@@ -54,6 +54,7 @@ public:
 
     Midia::Genero* getGenero();
 
+    //VOLTADO PARA IMPRESSAO DE ATRIBUTOS
     std::string getProdutores();
     void addProdutor(std::string produtor);
     void rmProdutor(std::string produtor);

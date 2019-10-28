@@ -12,6 +12,7 @@ class Produtor : public Usuario
 private:
     std::list<Midia*>* midias;
 
+    //OBJETIVOS ESPECIFICOS PARA GERACAO DE RELATORIOS, IMPLEMENTADO EM PLATAFORMADIGITAL
     friend std::list<Midia*>* getMidias(Produtor* produtor);
 
 public:
@@ -27,6 +28,7 @@ public:
     void escreveMidiasNoArquivo(std::ofstream& file);
 };
 
+//METODO DE ORDENACAO
 template <typename T>
 bool ordenaCrescPorNome(T *obj1, T *obj2);
 
