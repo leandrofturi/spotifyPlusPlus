@@ -35,6 +35,11 @@ int main (int argc, char *argv[])
     }
     PlataformaDigital* plataforma = inicializaSpotifyPlusPlus(fileUsuarios, fileGeneros, fileMidias, fileFavoritas);
 
+    plataforma->escreveBackup();
+    plataforma->escreveEstatisticas();
+    plataforma->escreveFavoritas();
+    plataforma->escreveMidiasPorProdutores();
+
     delete plataforma;
     return 0;
 }

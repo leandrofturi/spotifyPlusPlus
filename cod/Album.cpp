@@ -20,6 +20,7 @@ Album::Album(std::string nome, int codigo, int duracao, int anoLancamento)
 Album::~Album()
 {
     for(Musica* aux : *this->musicas) delete aux;
+    //RELACAO DE COMPOSICAO
     delete this->musicas;
 
     this->qtdMusicas = 0;

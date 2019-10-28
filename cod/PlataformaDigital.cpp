@@ -24,17 +24,24 @@ PlataformaDigital::PlataformaDigital(std::string nome)
 
 PlataformaDigital::~PlataformaDigital()
 {
-    for(Assinante* aux : *(this->assinantes)) delete aux;
-    for(Produtor* aux : *(this->produtores)) delete aux;
     for(Midia* aux : *(this->midias))
+    {
         if(aux->getTipo() == "Musica")
         {
             Musica* auxMus = (Musica*) aux;
-            if(auxMus->getAlbum() == "") delete auxMus;
+            if(auxMus->getAlbum() == "") delete aux;
+            //DELETANDO AS MUSICAS SEM ALBUM
         }
-    for(Midia::Genero* aux : *(this->generos)) delete aux;
+        if(aux->getTipo() == "Podcast") delete aux;
+        //DELETANDO PODCAST, JA QUE NAO POSSUEM ALBUNS
+    }
     for(Album* aux : *(this->albuns)) delete aux;
-
+    //AO DELETAR ALBUM, DELETA-SE AS MUSICAS PERTENCENTES A ELE (COMPOSICAO)
+    for(Assinante* aux : *(this->assinantes)) delete aux;
+    for(Produtor* aux : *(this->produtores)) delete aux;
+    for(Midia::Genero* aux : *(this->generos)) delete aux;
+    //RELACAO DE COMPOSICAO
+    
     delete this->assinantes;
     delete this->produtores;
     delete this->midias;
@@ -304,11 +311,7 @@ PROCESSAMENTO DOS RELATORIOS
 */
 void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
 {
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Carregando usuarios..." << std::endl;
 
@@ -331,22 +334,15 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
         {
             tok.overwriteStream(linha);
             cel = tok.remaining();
-            if(cel.size() != col)
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if(cel.size() != col) throw "Erro de formatacao";
             codigo = cpp_util::trim(cel[0]);
             tipo = cpp_util::trim(cel[1]);
             nome = cel[2];
+            //RETIRANDO CARACTERES ESPECIAIS
             nome = cpp_util::removeChar(nome, (char) 13);
             nome = cpp_util::removeChar(nome, (char) 10);
 
-            if(!cpp_util::isNumber(codigo))
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if(!cpp_util::isNumber(codigo)) throw "Erro de formatacao";
 
             Usuario *usuario;
             if(tipo == "P")
@@ -374,11 +370,7 @@ void PlataformaDigital::carregaArquivoUsuarios(std::ifstream& file)
 
 void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
 {
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Carregando generos..." << std::endl;
 
@@ -400,13 +392,10 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
         {
             tok.overwriteStream(linha);
             cel = tok.remaining();
-            if(cel.size() != col)
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if(cel.size() != col) throw "Erro de formatacao";
             sigla = cpp_util::trim(cel[0]);
             nome = cel[1];
+            //RETIRANDO CARACTERES ESPECIAIS
             nome = cpp_util::removeChar(nome, (char) 13);
             nome = cpp_util::removeChar(nome, (char) 10);
 
@@ -421,11 +410,7 @@ void PlataformaDigital::carregaArquivoGeneros(std::ifstream& file)
 
 void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
 {
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Carregando midias..." << std::endl;
 
@@ -438,6 +423,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
     std::string nome;
     std::string tipo;
     std::vector<std::string> vetProdutores;
+    //LISTA AUXILIAR PARA ADICIONAR AS MIDIAS PRODUZIDAS PELOS PRODUTORES
     std::list<Produtor*>* produtores = new std::list<Produtor*>;
     std::vector<std::string> vetDuracao;
     double duracao;
@@ -458,11 +444,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
         {
             tok.overwriteStream(linha);
             cel = tok.remaining();
-            if(cel.size() != col)
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if(cel.size() != col) throw "Erro de formatacao";
 
             codigo = cpp_util::trim(cel[0]);
             nome = cpp_util::trim(cel[1]);
@@ -472,6 +454,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
             tokComma.overwriteStream(cpp_util::trim(cel[3]));
             vetProdutores = tokComma.remaining();
             produtores->clear();
+            //ESVAZIA-SE A LISTA AUXILIAR
             tokComma.overwriteStream(cpp_util::trim(cel[4]));
             vetDuracao = tokComma.remaining();
             tokComma.overwriteStream(cpp_util::trim(cel[5]));
@@ -481,37 +464,24 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
             codAlbum = cpp_util::trim(cel[8]);
             anoLancamento = cpp_util::trim(cel[9]);
 
-            if((!cpp_util::isNumber(codigo)) || (!cpp_util::isNumber(anoLancamento)))
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if((!cpp_util::isNumber(codigo)) || (!cpp_util::isNumber(anoLancamento))) throw "Erro de formatacao";
             if(vetDuracao.size() == 1) vetDuracao.push_back("0");
-            if((!cpp_util::isNumber(cpp_util::trim(vetDuracao[0]))) || (!cpp_util::isNumber(cpp_util::trim(vetDuracao[1]))) || (vetDuracao.size() != 2))
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if((!cpp_util::isNumber(cpp_util::trim(vetDuracao[0]))) || (!cpp_util::isNumber(cpp_util::trim(vetDuracao[1]))) || (vetDuracao.size() != 2)) throw "Erro de formatacao";
             duracao = (double) (stoi(cpp_util::trim(vetDuracao[0])) + ((double) stoi(cpp_util::trim(vetDuracao[1])) / std::pow(10, cpp_util::trim(vetDuracao[1]).size())));
-            
+            //CALCULO DA DURACAO NO FORMATO ESPECIFICADO
+
             Midia::Genero* gen = this->buscaGenero(cpp_util::trim(vetGeneros[0]));
             Midia* midia;
-            if(gen == NULL)
-            {
-                std::cout << "ERRO! Genero nao encontrado!" << std::endl;
-                return;
-            }
+            if(gen == NULL) throw "Inconsistencias na entrada";
+
             if(tipo == "M")
             {
                 midia = new Musica(nome, std::stoi(codigo), duracao, std::stoi(anoLancamento), gen);
 
                 if(!codAlbum.empty())
                 {
-                    if(!cpp_util::isNumber(codAlbum))
-                    {
-                        std::cout << "ERRO! Formato invalido!" << std::endl;
-                        return;
-                    }
+                    if(!cpp_util::isNumber(codAlbum)) throw "Inconsistencias na entrada";
+
                     Album* alb = this->buscaAlbum(stoi(codAlbum));
                     if(alb == NULL)
                     {
@@ -523,31 +493,20 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
             }
             else if(tipo == "P")
             {
-                if(!cpp_util::isNumber(temporada))
-                {
-                    std::cout << "ERRO! Formato invalido!" << std::endl;
-                    return;
-                }
+                if(!cpp_util::isNumber(temporada)) throw "Erro de formatacao";
                 midia = new Podcast(nome, std::stoi(codigo), duracao, std::stoi(anoLancamento), gen, std::stoi(temporada));
             }
             for(std::string aux : vetProdutores)
             {
                 if(!vetProdutores.empty())
                 {
-                    if(!(cpp_util::isNumber(cpp_util::trim(aux))))
-                    {
-                        std::cout << "ERRO! Formato invalido!" << std::endl;
-                        return;
-                    }
+                    if(!(cpp_util::isNumber(cpp_util::trim(aux)))) throw "Erro de formatacao";
                     Produtor* prod = this->buscaProdutor(stoi(cpp_util::trim(aux)));
-                    if(prod == NULL)
-                    {
-                        std::cout << "ERRO! Produtor nao encontrado!" << std::endl;
-                        return;
-                    }
+                    if(prod == NULL) throw "Inconsistencias na entrada";
                     produtores->push_back(prod);
                 }
             }
+            // PARA CADA PRODUTOR, NA LISTA DE PRODUTORES, ADICIONA-SE A MIDIA
             this->addMidia(midia, produtores);
             contMid ++;
         }
@@ -558,11 +517,7 @@ void PlataformaDigital::carregaArquivoMidias(std::ifstream& file)
 
 void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
 {
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Construindo favoritismos" << std::endl;
 
@@ -584,44 +539,25 @@ void PlataformaDigital::carregaArquivoFavoritos(std::ifstream& file)
         {
             tok.overwriteStream(linha);
             cel = tok.remaining();
-            if(cel.size() != col)
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if(cel.size() != col) throw "Erro de formatacao";
 
             codigo = cpp_util::trim(cel[0]);
             tokComma.overwriteStream(cpp_util::trim(cel[1]));
             vetMidias = tokComma.remaining();
 
-            if(!(cpp_util::isNumber(codigo)))
-            {
-                std::cout << "ERRO! Formato invalido!" << std::endl;
-                return;
-            }
+            if(!(cpp_util::isNumber(codigo))) throw "Erro de formatacao";
             Assinante* ass = this->buscaAssinante(stoi(codigo));
-            if(ass == NULL)
-            {
-                std::cout << "ERRO! Assinante nao encontrado!" << std::endl;
-                return;
-            }
+            if(ass == NULL) throw "Inconsistencias na entrada";
+
             if(!vetMidias.empty())
             {
                 if ((int) vetMidias[0][0] > 31)
                 {
                     for(std::string aux : vetMidias)
                     {
-                        if(!(cpp_util::isNumber(cpp_util::trim(aux))))
-                        {
-                            std::cout << "ERRO! Formato invalido!" << std::endl;
-                            return;
-                        }
+                        if(!(cpp_util::isNumber(cpp_util::trim(aux)))) throw "Erro de formatacao";
                         Midia* midia = this->buscaMidia(stoi(cpp_util::trim(aux)));
-                        if(midia == NULL)
-                        {
-                            std::cout << "ERRO! Midia nao encontrada!" << std::endl;
-                            return;
-                        }
+                        if(midia == NULL) throw "Inconsistencias na entrada";
                         ass->addFavorita(midia);
                     }
                 }
@@ -638,11 +574,7 @@ void PlataformaDigital::escreveEstatisticas()
 {
     std::ofstream file;
     file.open("1-estatisticas.txt", std::ios::out);
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Escrevendo estatisticas..." << std::endl;
     
@@ -698,11 +630,7 @@ void PlataformaDigital::escreveMidiasPorProdutores()
 {
     std::ofstream file;
     file.open("2-produtores.csv", std::ios::out);
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Escrevendo midias por produtores..." << std::endl;
 
@@ -718,11 +646,7 @@ void PlataformaDigital::escreveFavoritas()
 {
     std::ofstream file;
     file.open("3-favoritos.csv", std::ios::out);
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Escrevendo favoritos..." << std::endl;
 
@@ -739,11 +663,7 @@ void PlataformaDigital::escreveBackup()
 {
     std::ofstream file;
     file.open("4-backup.txt", std::ios::out);
-    if(!file.is_open())
-    {
-        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
-        return;
-    }
+    if(!file.is_open()) throw "Erro de I/O";
 
     std::cout << "Escrevendo backup..." << std::endl;
 
@@ -853,21 +773,32 @@ PlataformaDigital* inicializaSpotifyPlusPlus(std::string fileUsuarios, std::stri
 
     PlataformaDigital* plataforma = new PlataformaDigital(nomePlataforma);
 
-    file.open(fileUsuarios);
-    plataforma->carregaArquivoUsuarios(file);
-    file.close();
+    try
+    {
+        file.open(fileUsuarios);
+        plataforma->carregaArquivoUsuarios(file);
+        file.close();
 
-    file.open(fileGeneros);
-    plataforma->carregaArquivoGeneros(file);
-    file.close();
+        file.open(fileGeneros);
+        plataforma->carregaArquivoGeneros(file);
+        file.close();
 
-    file.open(fileMidias);
-    plataforma->carregaArquivoMidias(file);
-    file.close();
+        file.open(fileMidias);
+        plataforma->carregaArquivoMidias(file);
+        file.close();
 
-    file.open(fileFavoritas);
-    plataforma->carregaArquivoFavoritos(file);
-    file.close();
+        file.open(fileFavoritas);
+        plataforma->carregaArquivoFavoritos(file);
+        file.close();
 
-    return plataforma;
+        return plataforma;
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+        //PEGO O ERRO GERADO
+        delete plataforma;
+        abort();
+        //COMO NAO DESEJO QUE O ERRO SE PROPAGUE
+    }
 }

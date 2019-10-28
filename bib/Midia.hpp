@@ -40,7 +40,7 @@ public:
 
     Midia();
     Midia(std::string nome, int codigo, double duracao, int anoLancamento, Midia::Genero* genero);
-    ~Midia();
+    virtual ~Midia();
 
     std::string getNome();
     void setNome(std::string nome);

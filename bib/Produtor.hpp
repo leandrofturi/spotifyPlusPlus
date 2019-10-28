@@ -18,7 +18,7 @@ private:
 public:
     Produtor();
     Produtor(std::string nome, int codigo);
-    ~Produtor();
+    virtual ~Produtor();
 
     void addMidia(Midia* midia);
     void rmMidia(Midia* midia);

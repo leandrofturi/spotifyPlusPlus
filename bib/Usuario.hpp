@@ -13,7 +13,7 @@ protected:
 public:
     Usuario();
     Usuario(std::string nome, int codigo);
-    ~Usuario();
+    virtual ~Usuario();
 
     std::string getNome();
     void setNome(std::string nome);
