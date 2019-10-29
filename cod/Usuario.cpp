@@ -24,3 +24,17 @@ int Usuario::getCodigo()
 {
     return this->codigo;
 }
+
+void Usuario::escreveNoArquivo(std::ofstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    file << this->getCodigo();
+    file << ":";
+    file << this->getNome();
+    file << std::endl;
+}

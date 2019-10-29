@@ -2,6 +2,7 @@
 #define _PODCAST_HPP_
 
 #include <iostream>
+#include <fstream>
 #include "Midia.hpp"
 
 class Podcast : public Midia
@@ -18,7 +19,7 @@ public:
     void setQtdTemporadas(int qtdTemporadas);
 
     void imprimeInfoMidia();
-    //void imprimeNoArquivo(std::ofstream& file);
+    void escreveNoArquivo(std::ofstream& file);
 };
 
 #endif

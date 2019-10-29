@@ -1,0 +1,229 @@
+Horas Consumidas: 90392 minutos
+
+Genero mais ouvido: Law - 4639 minutos
+
+Mídias por Gênero:
+Advice:57
+Arts:45
+Automobile:59
+Business and finance:37
+Comedy and humor:54
+Comic book:43
+Crime:67
+Educational:61
+Feminist:65
+Film and television:56
+History:59
+Horror:65
+Interview:60
+Law:76
+LGBT-related:51
+Music:54
+Philosophy:41
+Political:54
+Religion and spirituality:49
+Science fiction:57
+Science:50
+Sports:42
+Talk:45
+Technology:63
+Video game:49
+Kulintang:3
+Ca pe lunca:10
+De pahar:5
+Mbube:4
+Christmas music:7
+Gamelan angklung:4
+Cha-cha-cha:7
+Piano blues:11
+New age music:0
+Jibaro:17
+Intelligent dance music:6
+Likanos:7
+Méringue:10
+Heartland rock:5
+Japanese pop:4
+Breton music:6
+Roots reggae:8
+Drum and bass:6
+Plainchant:8
+Finger-style:8
+Funk rock:2
+Contemporary christian music:6
+Easy listening:16
+Hard bop:8
+Yo-pop:6
+Hiva usu:10
+British blues:6
+Lovers rock:10
+Boogie:5
+Suite:13
+Skiffle:8
+Indonesian pop:12
+Patriotic:12
+Csárdás:12
+Marinera:8
+Minstrel show:7
+Taiwanese pop:10
+Obscuro:5
+Coimbra fado:11
+World fusion music:11
+Cybergrind:8
+Nashville sound/countrypolitan:14
+Ppongtchak:14
+Rondeaux:5
+Acousticana:15
+Punta rock:11
+Mineras:8
+Zeuhl:9
+Modinha:14
+Rumba:7
+Orgel:3
+Semba:6
+Jamrieng samai:7
+Paisley underground:11
+Kayōkyoku:9
+New orleans blues:3
+Progressive death metal:5
+Forró:6
+Nu jazz:8
+Texas blues:10
+Doom metal:6
+Hapa haole:17
+Gangsta rap:12
+Russian pop:5
+Hakka:10
+Swing:12
+Philadelphia soul:6
+Tinku:9
+Trad jazz:2
+Cumbia villera:13
+Southern rock:7
+Villanella:8
+Cocobale:7
+Olonkho:9
+Nisiótika:10
+Blackened death metal:4
+New romantic:10
+Kwela:14
+Sludge metal:14
+Free music:11
+Qasidah:11
+De dragoste:17
+Desert rock:8
+Melodic trance:9
+Gwo ka:14
+Dubtronica:13
+Jenkka:2
+Juke joint blues:11
+Old school hip hop:2
+Shidaiqu:3
+Salsa:7
+Truck-driving country:9
+Hardcore metal:13
+Dark cabaret:6
+Liquid funk:3
+Khelimaski djili:3
+Juju:3
+Doomcore:10
+Bakersfield sound:7
+Deep funk:7
+Nu breaks:8
+Ars antiqua:11
+Le leagan:12
+Ziglibithy:6
+Música campesina:6
+Benga:9
+De jale:15
+African popular music:5
+Europop:9
+Reggaeton:6
+Kawachi ondo:5
+Deathcore:14
+Música de la interior:6
+East coast blues:4
+Operatic pop:12
+Sinawi:14
+Isicathamiya:4
+Gypsy punk:11
+Jazz rap:7
+Vocal jazz:7
+Kecak:7
+Verbunkos:14
+Jaipongan:9
+Modern laika:14
+Electronic art music:5
+Were music:8
+Kiwi rock:10
+Worldbeat:5
+Doo wop:7
+Waila:11
+Medieval metal:5
+Hyphy:14
+Dhimotiká:8
+Mezwed:12
+Psychedelic music:12
+Experimental noise:6
+Bhangragga:2
+Mafioso rap:12
+Xoomii:11
+Jazz fusion:10
+Funky house:14
+Kélé:17
+Pop folk:10
+Mushroom jazz:4
+Emocore:7
+Songo-salsa:11
+Latin pop:9
+Nueva canción:5
+Power electronics:8
+Jamana kura:12
+Alternative metal:7
+Rhapsody:6
+Korean pop:8
+Nganja:7
+Pimba:16
+Goa:8
+Ghazal-song:5
+Igbo music:9
+Eremwu eu:8
+Uplifting:13
+Symphonic black metal:9
+2 tone:10
+Disco:14
+Klape:8
+Zapin:5
+Southern soul:4
+Tropicalia:8
+Underground music:10
+Gamelan gede:9
+Palm wine:7
+Neue deutsche welle:21
+Gamelan semar pegulingan:8
+Visual music:8
+Classic:3
+Itsmeños:12
+
+Top 10 Midias:
+Sapiente:Crime:5
+Commodi quidem sequi ipsum at:Acousticana:5
+Ad:Horror:4
+Ipsam voluptatum consectetur delectus:Educational:4
+Neque reprehenderit reiciendis exercitationem labore ducimus:Benga:4
+Ullam pariatur:Science:4
+Numquam temporibus molestiae accusantium:Sludge metal:4
+Mollitia delectus adipisci ratione:Intelligent dance music:3
+Corrupti:Educational:3
+Quae ab nemo:Xoomii:3
+
+Top 10 Produtores:
+Sarah Lopes:40
+Carolina Alves:37
+Kamilly Viana:30
+Davi Lucca da Rosa:25
+Laís Teixeira:25
+Ana Júlia Rodrigues:25
+Maria Fernanda Ferreira:25
+Srta. Sarah Lopes:24
+Ana Clara Farias:24
+Yuri Fernandes:24

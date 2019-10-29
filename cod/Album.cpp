@@ -20,6 +20,7 @@ Album::Album(std::string nome, int codigo, int duracao, int anoLancamento)
 Album::~Album()
 {
     for(Musica* aux : *this->musicas) delete aux;
+    //RELACAO DE COMPOSICAO
     delete this->musicas;
 
     this->qtdMusicas = 0;
@@ -68,12 +69,18 @@ int Album::getQtdMusicas()
 void Album::addMusica(Musica* musica)
 {
     if(this->buscaMusica(musica->getCodigo()) == NULL)
+    {
+        musica->setAlbum(this->nome);
         this->musicas->push_back(musica);
+        this->qtdMusicas ++;
+    }
 }
 
 void Album::rmMusica(Musica* musica)
 {
+    musica->setAlbum("");
     this->musicas->remove(musica);
+    this->qtdMusicas --;
 }
 
 Musica* Album::buscaMusica(int codigo)

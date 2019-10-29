@@ -2,6 +2,7 @@
 #define _MIDIA_HPP_
 
 #include <iostream>
+#include <list>
 #include <ctime>
 #include "../cpp-utils/util/DateUtils.h"
 
@@ -32,12 +33,14 @@ protected:
 
     Midia::Genero* genero;
 
+    std::list<std::string> produtores;
+
 public:
     int qtdMidias;
 
     Midia();
     Midia(std::string nome, int codigo, double duracao, int anoLancamento, Midia::Genero* genero);
-    ~Midia();
+    virtual ~Midia();
 
     std::string getNome();
     void setNome(std::string nome);
@@ -51,9 +54,14 @@ public:
 
     Midia::Genero* getGenero();
 
+    //VOLTADO PARA IMPRESSAO DE ATRIBUTOS
+    std::string getProdutores();
+    void addProdutor(std::string produtor);
+    void rmProdutor(std::string produtor);
+
     void imprimeQtdMidias();
-    //virtual void imprimeInfoMidia() = 0;
-    //virtual void imprimeNoArquivo(std::ofstream& file) = 0;
+    virtual void imprimeInfoMidia() = 0;
+    virtual void escreveNoArquivo(std::ofstream& file) = 0;
 };
 
 #endif

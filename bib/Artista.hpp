@@ -21,8 +21,6 @@ public:
     void rmAlbum(Album* album);
     Album* buscaAlbum(int codigo);
     void imprimeMusicas();
-
-    //void imprimeNoArquivo(std::ofstream& file);
 };
 
 #endif

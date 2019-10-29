@@ -19,11 +19,15 @@ Produtor::~Produtor()
 void Produtor::addMidia(Midia* midia)
 {
     if(this->buscaMidia(midia->getCodigo()) == NULL)
+    {
+        midia->addProdutor(this->nome);
         this->midias->push_back(midia);
+    }
 }
 
 void Produtor::rmMidia(Midia* midia)
 {
+    midia->rmProdutor(this->nome);
     this->midias->remove(midia);
 }
 
@@ -49,4 +53,31 @@ void Produtor::imprimeMidias()
         std::cout << std::endl;
     }
     std::cout << "################################" << std::endl << std::endl;
+}
+
+void Produtor::escreveMidiasNoArquivo(std::ofstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    file << this->getNome();
+    file << ";";
+
+    this->midias->sort(ordenaCrescPorNome<Midia>);
+    for(Midia* auxMid : *this->midias)
+    {
+        if(auxMid != *this->midias->begin())
+            file << ", ";
+        file << auxMid->getNome();
+    }
+    file << std::endl;
+}
+
+template <typename T>
+bool ordenaCrescPorNome(T *obj1, T *obj2)
+{
+    return cpp_util::stringCompare(obj1->getNome(), obj2->getNome());
 }

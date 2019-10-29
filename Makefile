@@ -1,5 +1,5 @@
 EXE := spotifyPlusPlus
-FLAGS := -g -w -O3 -std=c++17
+FLAGS := -g -w -O2 -std=c++17
 
 all:
 	g++ -c cod/*.cpp $(FLAGS)
@@ -7,9 +7,3 @@ all:
 	g++ -c $(EXE).cpp $(FLAGS)
 	g++ -o $(EXE) *.o $(FLAGS)
 	rm *.o
-
-teste:
-	./$(EXE)
-
-val:
-	valgrind ./$(EXE)

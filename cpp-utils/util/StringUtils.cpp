@@ -45,4 +45,9 @@ bool isNumber(string& s) {
 	return true;
 }
 
+string& removeChar(string& s, char c) {
+	s.erase(std::remove(s.begin(), s.end(), c), s.end());
+	return s;
+}
+
 }

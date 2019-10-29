@@ -50,3 +50,48 @@ void Assinante::imprimeFavoritas()
     }
     std::cout << "################################" << std::endl << std::endl;
 }
+
+void Assinante::escreveMidiaNoArquivo(std::ofstream& file)
+{
+    if(!file.is_open())
+    {
+        std::cout << "ERRO! Problemas ao abrir o Arquivo!" << std::endl;
+        return;
+    }
+
+    this->favoritas->sort(ordenaCrescPorCodigo<Midia>);
+    for(Midia* auxMid : *this->favoritas)
+        if(auxMid->getTipo() == "Podcast")
+        {
+            file << this->codigo;
+            file << ";";
+            file << auxMid->getTipo();
+            file << ";";
+            file << auxMid->getCodigo();
+            file << ";";
+            file << auxMid->getGenero()->getNome();
+            file << ";";
+            file << auxMid->formataDuracao();
+            file << std::endl;
+        }
+    for(Midia* auxMid : *this->favoritas)
+        if(auxMid->getTipo() == "Musica")
+        {
+            file << this->codigo;
+            file << ";";
+            file << auxMid->getTipo();
+            file << ";";
+            file << auxMid->getCodigo();
+            file << ";";
+            file << auxMid->getGenero()->getNome();
+            file << ";";
+            file << auxMid->formataDuracao();
+            file << std::endl;
+        }
+}
+
+template <typename T>
+bool ordenaCrescPorCodigo(T *obj1, T *obj2)
+{
+    return obj1->getCodigo() < obj2->getCodigo();
+}

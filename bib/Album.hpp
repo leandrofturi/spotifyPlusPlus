@@ -16,7 +16,7 @@ private:
     int qtdMusicas;
 
     std::list<Musica*>* musicas;
-
+    
 public:
     Album();
     Album(std::string nome, int codigo, int duracao, int anoLancamento);
