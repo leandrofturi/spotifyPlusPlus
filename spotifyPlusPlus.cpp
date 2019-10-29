@@ -1,3 +1,9 @@
+/*
+    Trabalho de Programacao III
+    Leandro Furlam e Isauflania Ribeiro
+    29/10/2019
+*/
+
 #include "bib/Album.hpp"
 #include "bib/Artista.hpp"
 #include "bib/Assinante.hpp"
